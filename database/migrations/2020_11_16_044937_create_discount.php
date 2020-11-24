@@ -19,6 +19,7 @@ class CreateDiscount extends Migration
             $table->string('discount_type');
             $table->float('discount_value');
             $table->timestamp('discount_end');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

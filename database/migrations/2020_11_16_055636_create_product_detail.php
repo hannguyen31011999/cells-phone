@@ -16,11 +16,10 @@ class CreateProductDetail extends Migration
         Schema::create('product_detail', function (Blueprint $table) {
             $table->Increments('id');
             $table->integer('product_id')->unsigned();
-            $table->float('price_product');
-            $table->integer('qty');
             $table->tinyInteger('rom');
-            $table->tinyInteger('color');
-            $table->string('image');
+            $table->integer('price_product');
+            $table->integer('qty');
+            $table->string('image')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

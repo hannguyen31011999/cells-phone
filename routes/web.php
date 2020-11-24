@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/logout','frontend\LoginController@Logout');
 
 
-
 // Route login admin
 Route::get('/login',function(){
 	return view('backend.login.index_login');
@@ -35,6 +34,28 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminLogin','namespace'=>'ba
 			Route::get('/list','CategoriesController@index');
 			Route::get('/create','CategoriesController@create');
 			Route::post('/create','CategoriesController@store')->name('create');
+			Route::get('/update/{id}','CategoriesController@edit');
+			Route::post('/update/{id}','CategoriesController@update')->name('update');
+			Route::get('/delete/{id}','CategoriesController@destroy')->name('delete');
+		});
+	});
+
+	Route::group(['prefix'=>'product'],function(){
+		Route::name('product.')->group(function(){
+			Route::get('/list','ProductController@index')->name('list');
+			Route::get('/create','ProductController@create');
+			Route::post('/create','ProductController@store')->name('create');
+			Route::get('/edit/{id}','ProductController@edit');
+			Route::post('/edit/{id}','ProductController@update')->name('update');
+			Route::get('/delete/{id}','ProductController@destroy')->name('delete');
+		});
+
+		Route::name('product_detail.')->group(function(){
+			Route::get('{id}/detail/list','ProductDetailController@index')->name('list');
+			Route::get('{id}/detail/create','ProductDetailController@create')->name('create');
+			Route::post('{id}/detail/create','ProductDetailController@store')->name('store');
+			Route::get('{id}/detail/edit','ProductDetailController@edit')->name('edit');
+			Route::post('{id}/detail/edit','ProductDetailController@update')->name('update');
 		});
 	});
 });

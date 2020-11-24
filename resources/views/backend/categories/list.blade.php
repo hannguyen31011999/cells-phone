@@ -13,6 +13,15 @@
 <br></br>
 <div class="row">
     <div class="col-12">
+        @if(Session::has('success'))
+            <div class="alert alert-icon alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <i class="mdi mdi-check-all mr-2"></i>
+                <strong>{{Session::get('success')}}</strong>
+            </div>
+        @endif
         <div class="card">
             <div class="card-body table-responsive">
                 <h4 class="m-t-0 header-title mb-4"><b>Danh sách loại sản phẩm</b></h4>
@@ -22,7 +31,7 @@
                 <table id="datatable" class="table table-bordered table-stried" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <thead>
                         <tr>
-                            <th>Tên loại sản phẩm</th>
+                            <th>Hãng sản xuất</th>
                             <th>Hình ảnh</th>
                             <th>Mô tả</th></div>
                             <th>Thời gian tạo</th>
@@ -33,11 +42,11 @@
                     @foreach($categories as $categories)
                         <tr>
                             <td>{{$categories->categories_name}}</td>
-                            <td><img src="{{ asset('/storage/app/categories/'.$categories->categories_image) }}" width="100" height="100"></td>
+                            <td><img src="{{ asset('backend/categories_img/'.$categories->categories_image) }}" width="112" height="28"></td>
                             <td><div style="max-height: 150px;overflow: auto;">{{$categories->categories_desc}}</div></td>
                             <td>{{date_format($categories->created_at,"d/m/Y H:i")}}</td>
-                            <td><div style="width: 100px;"><a href="{{url('admin/categories/create')}}" class="btn btn-icon waves-effect waves-light btn-warning"><i class="fa fa-wrench"></i></a>
-                            <a href="{{url('admin/categories/create')}}" class="btn btn-icon waves-effect waves-light btn-danger" style="margin-left: 5px;"><i class="fas fa-trash-alt"></i></a></div></td>
+                            <td><div style="width: 100px;"><a href="{{url('admin/categories/update',['id'=>$categories->id])}}" class="btn btn-icon waves-effect waves-light btn-warning"><i class="fa fa-wrench"></i></a>
+                            <a href="{{route('categories.delete',['id'=>$categories->id])}}" onclick="confirm('Bạn muốn xóa hãng sản phẩm này?');" class="btn btn-icon waves-effect waves-light btn-danger" style="margin-left: 5px;"><i class="fas fa-trash-alt"></i></a></div></td>
                         </tr>
                     @endforeach
                     </tbody>

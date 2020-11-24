@@ -19,12 +19,14 @@
         <link href="{{asset('backend\assets\css\icons.min.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('backend\assets\css\app.min.css')}}" rel="stylesheet" type="text/css" id="app-stylesheet">
 
+        <link href="{{asset('backend\assets\libs\bootstrap-tagsinput\bootstrap-tagsinput.css')}}" rel="stylesheet">
 
         <!-- third party css -->
         <link href="{{asset('backend\assets\libs\datatables\dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('backend\assets\libs\datatables\buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('backend\assets\libs\datatables\responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
         <link href="{{asset('backend\assets\libs\datatables\select.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
+        <link href="{{asset('backend\assets\libs\dropzone\dropzone.min.css')}}" rel="stylesheet" type="text/css">
         @yield('css')
     </head>
     <body>
@@ -331,9 +333,9 @@
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
 
-                                <li><a href="{{url('admin/categories/list')}}">Loại sản phẩm</a></li>
-                                <li><a href="ui-buttons.html">Sản phẩm</a></li>
-                                <li><a href="ui-fontawesome.html">Chi tiết sản phẩm</a></li>
+                                <li><a href="{{url('admin/categories/list')}}">Hãng sản xuất</a></li>
+                                <li><a href="{{url('admin/product/list')}}">Sản phẩm</a></li>
+                                <li><a href="ui-fontawesome.html">Khuyến mãi</a></li>
                             </ul>
                         </li>
 
@@ -386,7 +388,6 @@
                             </a>
                         </li>
                     </ul>
-
                 </div>
                 <!-- End Sidebar -->
 
@@ -504,6 +505,9 @@
         <script src="{{asset('backend\assets\libs\jquery-scrollto\jquery.scrollTo.min.js')}}"></script>
         <script src="{{asset('backend\assets\libs\sweetalert2\sweetalert2.min.js')}}"></script>
 
+        <!-- Sweet alert init js-->
+        <script src="{{asset('backend\assets\js\pages\sweet-alerts.init.js')}}"></script>
+        
         <!-- Chat app -->
         <script src="{{asset('backend\assets\js\pages\jquery.chat.js')}}"></script>
 
@@ -546,5 +550,11 @@
         <!-- Datatables init -->
         <script src="{{asset('backend\assets\js\pages\datatables.init.js')}}"></script>
 
+
+        <!-- dropzone -->
+        <script src="{{asset('backend\assets\libs\dropzone\dropzone.min.js')}}"></script>
+
+        <!-- tag input -->
+        <script src="{{asset('backend\assets\libs\bootstrap-tagsinput\bootstrap-tagsinput.min.js')}}"></script>
     </body>
 </html>
