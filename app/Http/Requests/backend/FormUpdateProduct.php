@@ -25,7 +25,7 @@ class FormUpdateProduct extends FormRequest
     {
         return [
             'categories_id'=>'numeric',
-            'product_name'=>'required|max:254|unique:product,product_name',
+            'product_name'=>'required|max:254',
             'desc'=>'required',
             'screen'=>'required|numeric',
             'screen_resolution'=>'required|max:254',

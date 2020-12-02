@@ -20,7 +20,6 @@ class Product extends Model
     	'categories_id',
     	'discount_id',
     	'product_name',
-        'color',
         'desc',
     	'screen',
     	'screen_resolution',

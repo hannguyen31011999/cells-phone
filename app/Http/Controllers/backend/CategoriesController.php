@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\backend\FormCategories;
+use App\Http\Requests\backend\FormUpdateCategories;
 use Illuminate\Support\Facades\File;
 use App\Model\Categories;
 class CategoriesController extends Controller
@@ -97,7 +98,7 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(FormCategories $request, $id)
+    public function update(FormUpdateCategories $request, $id)
     {
         // old method
 
@@ -112,6 +113,18 @@ class CategoriesController extends Controller
         ];
 
         $categories = Categories::findOrFail($id);
+
+        if(strcmp($array['categories_name'],$categories->categories_name)!==0)
+        {
+            $this->validate($request,
+                [
+                    'categories_name'=>'unique:categories,categories_name'
+                ],
+                [
+                    'categories_name.unique'=>'Tên nhà sản xuất đã tồn tại'
+                ]
+            );
+        }
 
         if($request->hasFile('categories_img'))
         {
@@ -148,9 +161,12 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $categories = Categories::findOrFail($id);
-        unlink(public_path()."/backend/categories_img/".$categories->categories_image);
-        $categories->delete();
-        return redirect('admin/categories/list');
+        try{
+            Categories::findOrFail($id)->delete();
+            unlink(public_path()."/backend/categories_img/".$categories->categories_image);
+            return redirect('admin/categories/list');
+        }catch(Exception $e){
+            return back()->with('error','Đã xảy ra lỗi,xin thử lại');
+        }
     }
 }

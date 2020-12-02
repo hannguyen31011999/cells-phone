@@ -335,7 +335,7 @@
 
                                 <li><a href="{{url('admin/categories/list')}}">Hãng sản xuất</a></li>
                                 <li><a href="{{url('admin/product/list')}}">Sản phẩm</a></li>
-                                <li><a href="ui-fontawesome.html">Khuyến mãi</a></li>
+                                <li><a href="{{route('discount.list')}}">Khuyến mãi</a></li>
                             </ul>
                         </li>
 

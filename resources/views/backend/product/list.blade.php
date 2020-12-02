@@ -16,6 +16,35 @@
         margin-left: 10px;
         font-size: 17px;
     }
+
+    #overlay{
+      position: fixed;
+      top:25%;
+      left:35%;
+      bottom: 25%;
+      right: 25%;
+      width:50%;
+      height:50%;
+      background: rgba(0,0,0,0.8) none 50% / contain no-repeat;
+      cursor: pointer;
+      transition: 0.3s;
+      
+      visibility: hidden;
+      opacity: 0;
+    }
+    #overlay.open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    #overlay:after { /* X button icon */
+      content: "\2715";
+      position: absolute;
+      color:#fff;
+      top: 10px;
+      right:20px;
+      font-size: 2em;
+    }
 </style>
 @endsection
 @section('content')
@@ -65,7 +94,7 @@
                             <td>
                                 <div style="width: 100px;">
                                     <a href="{{url('admin/product/edit',['id'=>$products->id])}}" class="btn btn-icon waves-effect waves-light btn-warning"><i class="fa fa-wrench"></i></a>
-                                    <a href="" onclick="confirm('Bạn muốn sản phẩm này?');" class="btn btn-icon waves-effect waves-light btn-danger" style="margin-left: 5px;"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="{{route('product.delete',['id'=>$products->id])}}" onclick="confirm('Bạn muốn sản phẩm này?');" class="btn btn-icon waves-effect waves-light btn-danger" style="margin-left: 5px;"><i class="fas fa-trash-alt"></i></a>
                                 </div>
                                 <button class="btn btn-info waves-effect width-md waves-light" style="margin-top: 5px;" data-toggle="modal" data-target="#detailProduct{{$products->id}}">Chi tiết</button>
                             </td>
@@ -82,5 +111,4 @@
 @endsection
 
 @section('js')
-
 @endsection

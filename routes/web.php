@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/','frontend\PageController@index');
+
+Route::get('/modal-detail-product','frontend\PageController@detailProduct');
+
+Route::get('/change-color','frontend\PageController@changeColorProduct');
+
 // Route logout
 Route::get('/logout','frontend\LoginController@Logout');
 
@@ -41,6 +48,7 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminLogin','namespace'=>'ba
 	});
 
 	Route::group(['prefix'=>'product'],function(){
+		// route product
 		Route::name('product.')->group(function(){
 			Route::get('/list','ProductController@index')->name('list');
 			Route::get('/create','ProductController@create');
@@ -50,12 +58,36 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminLogin','namespace'=>'ba
 			Route::get('/delete/{id}','ProductController@destroy')->name('delete');
 		});
 
+		// route product_detail
 		Route::name('product_detail.')->group(function(){
 			Route::get('{id}/detail/list','ProductDetailController@index')->name('list');
 			Route::get('{id}/detail/create','ProductDetailController@create')->name('create');
 			Route::post('{id}/detail/create','ProductDetailController@store')->name('store');
-			Route::get('{id}/detail/edit','ProductDetailController@edit')->name('edit');
-			Route::post('{id}/detail/edit','ProductDetailController@update')->name('update');
+			Route::get('{id}/detail/edit/{idDetail}','ProductDetailController@edit')->name('edit');
+			Route::post('{id}/detail/edit/{idDetail}','ProductDetailController@update')->name('update');
+			Route::get('{id}/delete/edit/{idDetail}','ProductDetailController@destroy')->name('delete');
+		});
+
+		// route attribute product
+		Route::name('attribute_product.')->group(function(){
+			Route::get('{id}/attribute/list','AttributeProductController@index')->name('list');
+			Route::get('{id}/attribute/create','AttributeProductController@create')->name('create');
+			Route::post('{id}/attribute/create','AttributeProductController@store')->name('store');
+			Route::get('{id}/attribute/edit/{idAttribute}','AttributeProductController@edit')->name('edit');
+			Route::post('{id}/attribute/edit/{idAttribute}','AttributeProductController@update')->name('update');
+			Route::get('{id}/attribute/delete/{idAttribute}','AttributeProductController@destroy')->name('delete');
+		});
+	});
+
+	// route discount
+	Route::group(['prefix'=>'discount'],function(){
+		Route::name('discount.')->group(function(){
+			Route::get('/list','DiscountController@index')->name('list');
+			Route::get('/create','DiscountController@create')->name('store');
+			Route::post('/create','DiscountController@store')->name('create');
+			Route::get('/edit/{id}','DiscountController@edit')->name('edit');
+			Route::post('/edit/{id}','DiscountController@update')->name('update');
+			Route::get('/delete/{id}','DiscountController@destroy')->name('delete');
 		});
 	});
 });

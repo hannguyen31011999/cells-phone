@@ -45,6 +45,7 @@
                                 <label class="col-lg-2 col-form-label">Khuyến mãi</label>
                                 <div class="col-lg-10">
                                     <select class="form-control" name="discount_id">
+                                    <option value="0">Chọn khuyến mãi</option>
                                     @foreach($discount as $discount)
                                     	<option value="{{$discount->id}}">{{$discount->discount_name}}</option>
                                     @endforeach
@@ -139,7 +140,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-2 col-form-label">Ram</label>
                                 <div class="col-lg-10">
-                                    <input type="text" name="ram" class="form-control" value="{{old('ram')}}" placeholder="Nhập dung lượng ram">
+                                    <input type="number" name="ram" class="form-control" value="{{old('ram')}}" placeholder="Nhập dung lượng ram">
                                     @if($errors->has('ram'))
                                     	<div class="alert alert-danger">
                                     		{{$errors->first('ram')}}
@@ -210,7 +211,7 @@
                             <div class="form-group row">
                                 <label class="col-lg-2 col-form-label">Dung lượng pin</label>
                                 <div class="col-lg-10">
-                                    <input type="text" name="pin" class="form-control" value="{{old('pin')}}" placeholder="Nhập dung lượng pin">
+                                    <input type="number" name="pin" class="form-control" value="{{old('pin')}}" placeholder="Nhập dung lượng pin">
                                     @if($errors->has('pin'))
                                     	<div class="alert alert-danger">
                                     		{{$errors->first('pin')}}
@@ -218,39 +219,14 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-lg-2 col-form-label">Màu sắc</label>
-                                <div class="col-lg-10">
-                                    <div class="tags-default">
-                                        <input type="text" value="{{old('color')}}" data-role="tagsinput" name="color" placeholder="Thêm màu mới">
-                                    </div>
-                                    @if($errors->has('color'))
-                                        <div class="alert alert-danger">
-                                            {{$errors->first('color')}}
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-
+                            
                             <div class="form-group row">
                                 <label class="col-lg-2 col-form-label">Giá tiền</label>
                                 <div class="col-lg-10">
-                                    <input type="text" name="price_product" class="form-control" value="{{old('price_product')}}" placeholder="Nhập giá tiền">
+                                    <input type="number" name="price_product" class="form-control" value="{{old('price_product')}}" placeholder="Nhập giá tiền">
                                     @if($errors->has('price_product'))
                                         <div class="alert alert-danger">
                                             {{$errors->first('price_product')}}
-                                        </div>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-lg-2 col-form-label">Số lượng</label>
-                                <div class="col-lg-10">
-                                    <input type="text" name="qty" class="form-control" value="{{old('qty')}}" placeholder="Nhập số lượng sản phẩm">
-                                    @if($errors->has('qty'))
-                                        <div class="alert alert-danger">
-                                            {{$errors->first('qty')}}
                                         </div>
                                     @endif
                                 </div>

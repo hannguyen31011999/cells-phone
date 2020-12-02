@@ -11,6 +11,7 @@ use App\Model\Categories;
 use App\Model\Discount;
 use App\Model\ProductDetail;
 use App\Model\ListImage;
+use App\Model\AttributeProduct;
 class ProductController extends Controller
 {
     private $module = "backend.product";
@@ -28,7 +29,8 @@ class ProductController extends Controller
         $discount = Discount::all();
         $productdetail = ProductDetail::all();
         $listImage = ListImage::all();
-        return view($this->module.".list",compact('product','categories','discount','productdetail','listImage'));
+        $attribute = AttributeProduct::all();
+        return view($this->module.".list",compact('product','categories','discount','productdetail','listImage','attribute'));
     }
 
     /**
@@ -56,16 +58,19 @@ class ProductController extends Controller
 
         // $color = explode(',', $request["color"]);
 
+        $arr = $request->all();
+
+        $arr["discount_id"] = $arr["discount_id"]==0 ? null : $arr["discount_id"];
+
         if($request->hasFile('image'))
         {
             $files = $request->file('image');
             try{
-                $product = Product::create($request->all());
+                $product = Product::create($arr);
                 // save data to table product_detail
                 $product->ProductDetails()->create([
                     'rom'=>$request["rom"],
                     'price_product'=>$request["price_product"],
-                    'qty'=>$request["qty"]
                 ]);
                 // save image to table product_detail
                 foreach ($files as $file) {
@@ -124,10 +129,20 @@ class ProductController extends Controller
         $listImage = $product->ListImages()->get();
         $path = public_path()."/backend/product_img/";
         $temp = -1;
-        if($request->hasFile('image'))
+        if(strcmp($request['product_name'],$product->product_name)!==0)
         {
-            //update product
-            $product->update($request->all());
+            $this->validate($request,
+                [
+                    "product_name"=>"unique:product,product_name"
+                ],
+                [
+                    "product_name.unique"=>"Tên sản phẩm đã tồn tại"
+                ]
+            );
+        }
+        //update product
+        $product->update($request->all());
+        if($request->hasFile('image')){
             try{
                 foreach ($listImage as $key1 => $value) {
                     foreach ($request->file('image') as $key => $file) {
@@ -159,11 +174,9 @@ class ProductController extends Controller
             }catch(Exception $e){
                 return back()->with('error','Đã xảy ra lỗi,xin thử lại');
             }
+        }else{
+            return redirect('admin/product/list')->with('success','Cập nhật sản phẩm thành công');
         }
-        else{
-            return back()->with('image_error','Chưa chọn file');
-        }
-        
     }
 
     /**
@@ -174,6 +187,14 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $product = Product::findOrFail($id);
+            $product->delete();
+            $product->ProductDetails()->delete();
+            $product->ListImages()->delete();
+            return redirect()->route('product.list');
+        }catch(Exception $e){
+            return back()->with('error','Đã xảy ra lỗi,xin thử lại');
+        }
     }
 }

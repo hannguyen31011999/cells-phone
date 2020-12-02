@@ -38,9 +38,7 @@ class FormProduct extends FormRequest
             'video'=>'required|max:254',
             'pin'=>'required|numeric',
             'price_product'=>'required|numeric',
-            'qty'=>'required|numeric',
-            'color'=>'required|max:254',
-            'image'=>'image|mimes:jpeg,png,jpg,gif|max:2048|unique:list_image,image'
+            'image'=>'max:2048|unique:list_image,image'
         ];
     }
 
@@ -74,10 +72,6 @@ class FormProduct extends FormRequest
             'ram.numeric'=>'Ram là số',
             'price_product.required'=>'Giá tiền sản phẩm trống',
             'price_product.numeric'=>'Giá tiền phải là số',
-            'qty.required'=>'Giá tiền sản phẩm trống',
-            'qty.numeric'=>'Giá tiền phải là số',
-            'color.required'=>'Chọn màu sản phẩm',
-            'color.max'=>'Màu sản phẩm quá nhiều',
             'image.image'=>'Ảnh không đúng định dạng',
             'image.mimes'=>'Không đúng loại ảnh jpeg,png,jpg,gif,svg',
             'image.max'=>'Quá kích thước ảnh',

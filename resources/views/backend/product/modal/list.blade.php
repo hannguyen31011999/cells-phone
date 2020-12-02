@@ -79,16 +79,26 @@
                     <td>Dung lượng pin:</td>
                     <td colspan="2">{{$products->pin}}mAh</td>
                   </tr>
-                  @foreach($productdetail as $productdetails)
-                    @if($productdetails->product_id==$products->id)
-                      <tr>
-                        <td>Màu sắc:</td>
-                        <td colspan="2">
-                            {{$products->color}}
-                        </td>
-                      </tr>
-                    @endif
-                  @endforeach
+                  <tr>
+                    <td>Màu sắc:</td>
+                    <td colspan="2">
+                        @foreach($attribute as $attributes)
+                          @if($attributes->product_id==$products->id)
+                              {{$attributes->color.","}}
+                          @endif
+                        @endforeach
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Hình ảnh</td>
+                    <td colspan="2">
+                    @foreach($listImage as $listImages)
+                      @if($listImages->product_id==$products->id)
+                        <img id="image" src="{{asset('backend/product_img/'.$listImages->image)}}" height="100px" width="100px">
+                      @endif
+                    @endforeach
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>

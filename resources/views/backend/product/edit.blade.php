@@ -82,20 +82,6 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="col-lg-2 col-form-label">Màu sắc</label>
-                                    <div class="col-lg-10">
-                                        <div class="tags-default">
-                                            <input type="text" value="{{$product->color}}" data-role="tagsinput" name="color" placeholder="Thêm màu mới">
-                                        </div>
-                                        @if($errors->has('color'))
-                                            <div class="alert alert-danger">
-                                                {{$errors->first('color')}}
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
                                     <label class="col-lg-2 col-form-label" for="example-textarea">Mô tả</label>
                                     <div class="col-lg-10">
                                         <textarea class="form-control" name="desc" id="ckeditor">{{$product->desc}}</textarea>
@@ -170,7 +156,7 @@
                                 <div class="form-group row">
                                     <label class="col-lg-2 col-form-label">Ram</label>
                                     <div class="col-lg-10">
-                                        <input type="text" name="ram" class="form-control" value="{{$product->ram}}">
+                                        <input type="number" name="ram" class="form-control" value="{{$product->ram}}">
                                         @if($errors->has('ram'))
                                         	<div class="alert alert-danger">
                                         		{{$errors->first('ram')}}
@@ -218,7 +204,7 @@
                                 <div class="form-group row">
                                     <label class="col-lg-2 col-form-label">Dung lượng pin</label>
                                     <div class="col-lg-10">
-                                        <input type="text" name="pin" class="form-control" value="{{$product->pin}}">
+                                        <input type="number" name="pin" class="form-control" value="{{$product->pin}}">
                                         @if($errors->has('pin'))
                                         	<div class="alert alert-danger">
                                         		{{$errors->first('pin')}}
