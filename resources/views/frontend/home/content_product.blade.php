@@ -33,7 +33,7 @@
                             </div>
                             <div class="pro-actions">
                                 <div class="actions-primary">
-                                    <a href="cart.html" title="Thêm vào giỏ hàng"> + Thêm vào giỏ hàng</a>
+                                    <a href="" title="Thêm vào giỏ hàng">Xem chi tiết</a>
                                 </div>
                                 <div class="actions-secondary">
                                     <a href="compare.html" title="So sánh sản phẩm"><i class="lnr lnr-sync"></i> <span>Thêm so sánh</span></a>

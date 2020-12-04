@@ -1,5 +1,8 @@
 <!-- Quick View Content Start -->
 <div class="main-product-thumbnail quick-thumb-content">
+    @if(isset($attribute))
+    <input type="hidden" name="" id="id-attribute" value="{{$attribute[0]->id}}">
+    @endif
     <div class="container">
         <!-- The Modal -->
         <div class="modal fade" id="myModal">
@@ -32,17 +35,17 @@
                             <!-- Thumbnail Description Start -->
                             <div class="col-lg-7 col-md-6 col-sm-7">
                                 <div class="thubnail-desc fix mt-sm-40">
-                                    @if(isset($product)&&isset($productDetail))
+                                    @if(isset($product)&&isset($productDetail)&&isset($discount))
                                     <h3 class="product-header">
                                             @foreach($product as $products)
                                                 {{$products->product_name}} {{$productDetail->rom}}GB
                                             @endforeach
                                     </h3>
                                     <div>
-                                        <p id="price_attribute" class="d-flex align-items-center" style="color: red;font-size: 20px;"><span class="price"></span>{{number_format($productDetail->price_product, 0, ".", ".")}}<sup>đ</sup></p>
+                                        <p id="price_attribute" class="d-flex align-items-center" style="color: red;font-size: 20px;"><span class="price">{{number_format($productDetail->price_product,0, ".", ".")}}<sup>đ</sup></span><span class="saving-price" style="margin-left: 5px;">khuyến mãi giảm trực tiếp {{($discount/1000)}}K</span></p>
                                     </div>
                                     @endif
-                                    <p class="mb-20 pro-desc-details">Chọn màu mà bạn yêu thích</p>
+                                    <p class="mb-20 pro-desc-details" style="margin-top: 5px;">Chọn màu mà bạn yêu thích</p>
                                     <div class="box-product">
                                     @if(isset($attribute))
                                         @foreach($attribute as $attributes)
@@ -56,9 +59,9 @@
                                     </div>
                                     <div class="box-quantity d-flex">
                                         <form action="#">
-                                            <input class="quantity mr-40" type="number" min="1" value="1">
+                                            <input class="quantity mr-40" type="number" min="1" value="1" name="">
                                         </form>
-                                        <a class="add-cart" href="cart.html">Thêm giỏ hàng</a>
+                                        <a class="add-cart" id="" href="#">Thêm giỏ hàng</a>
                                     </div>
                                     <div class="pro-ref mt-15">
                                         <p><span class="in-stock"><i class="ion-checkmark-round"></i>Còn hàng</span></p>

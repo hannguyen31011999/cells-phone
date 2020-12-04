@@ -34,6 +34,9 @@
     <!-- Responsive css -->
     <link rel="stylesheet" href="{{asset('frontend\css\responsive.css')}}">
 
+    <!-- alertifyJS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    
     @yield('css')
 
 </head>
@@ -82,8 +85,7 @@
         
         <!-- Categorie Menu & Slider Area End Here -->
         <!-- Brand Banner Area Start Here -->
-        @include('frontend.banner.image_banner_master')
-        
+        @yield('banner')
         <!-- Brand Banner Area End Here -->
         <!-- Hot Deal Products Start Here -->
 
@@ -181,6 +183,9 @@
 
     <!-- Modernizer js -->
     <script src="{{asset('frontend\js\vendor\modernizr-3.5.0.min.js')}}"></script>
+
+    <!-- alertifyJS -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 </body>
 
 </html>

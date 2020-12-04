@@ -11,12 +11,19 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/','frontend\PageController@index');
+Route::get('/','frontend\PageController@index')->name('home');
 
 Route::get('/modal-detail-product','frontend\PageController@detailProduct');
 
 Route::get('/change-color','frontend\PageController@changeColorProduct');
 
+Route::get('/add-cart','frontend\CartController@addCart');
+
+Route::get('/delete-cart','frontend\CartController@deleteCart');
+
+Route::get('/shopping-cart',function(){
+	return view('frontend.cart.shoppingcart');
+});
 // Route logout
 Route::get('/logout','frontend\LoginController@Logout');
 

@@ -36,4 +36,14 @@ class AttributeProduct extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function ProductDetails()
+    {
+        return $this->belongsTo('App\Model\ProductDetail','product_detail_id','id');
+    }
+
+    public function Products()
+    {
+        return $this->belongsTo('App\Model\Product','product_id','id');
+    }
 }

@@ -62,4 +62,9 @@ class Product extends Model
     {
         return $this->hasMany("App\Model\ProductDetail",'product_id','id')->count();
     }
+
+    public function Discounts()
+    {
+        return $this->belongsTo('App\Model\Discount','discount_id','id');
+    }
 }
