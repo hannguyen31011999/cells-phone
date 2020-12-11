@@ -38,8 +38,23 @@ class Cart{
 		$newProduct['discount'] = $product['discount']*$product['qty'];
 		$this->products[$id] = $newProduct;
 		$this->totalPrice += $product['price']*$product['qty'];
-		$this->totalDiscount += $product['discount']*$product['qty'];
+		$this->totalDiscount += $newProduct['discount'];
 		$this->totalQuantity += $product['qty'];
+	}
+
+	public function updateCart($id,$qty)
+	{
+		if(!empty($this->products))
+		{
+			if(array_key_exists($id,$this->products))
+			{
+				$this->totalPrice += ($qty * $this->products[$id]['price'])-($this->products[$id]['price']*$this->products[$id]['qty']);
+				$this->totalDiscount += ($this->products[$id]['discount']/$this->products[$id]['qty'])*$qty - $this->products[$id]['discount'];
+				$this->totalQuantity += $qty - $this->products[$id]['qty'];
+				$this->products[$id]['discount'] = ($this->products[$id]['discount']/$this->products[$id]['qty'])*$qty;
+				$this->products[$id]['qty'] = $qty;
+			}
+		}
 	}
 
 	public function deleteCart($id)

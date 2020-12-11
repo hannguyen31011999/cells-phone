@@ -14,6 +14,7 @@ class CartController extends Controller
 
 	private $module_cart = "frontend.cart";
 
+
 	public function addCart(Request $request)
 	{
 		$oldCart = !empty(Session('cart')) ? Session('cart') : null;
@@ -40,6 +41,18 @@ class CartController extends Controller
 		}
 	}
 
+	public function updateCart(Request $request)
+	{
+		$oldCart = !empty(Session('cart')) ? Session('cart') : null;
+		$newCart = new Cart($oldCart);
+		if($request->ajax())
+		{
+			$newCart->updateCart($request->id,$request->qty);
+			Session(['cart'=>$newCart]);
+			return response()->json(['data'=>Session('cart')],200);
+		}
+	}
+
 	public function deleteCart(Request $request)
 	{
 		$oldCart = !empty(Session('cart')) ? Session('cart') : null;
@@ -48,7 +61,7 @@ class CartController extends Controller
 		{
 			$newCart->deleteCart($request->id);
 			Session(['cart'=>$newCart]);
-			if(count(Session('cart')->products)<1){Session::forget('cart');}
+			if(empty(Session('cart')->products)){Session::forget('cart');}
 			return view($this->module.".cart");
 		}
 	}

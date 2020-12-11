@@ -6,7 +6,13 @@
 
 </style>
 @endsection
+@section('header')
+    @include('frontend.header.header_master')
+@endsection
 
+@section('categories')
+    @include('frontend.categories.categories_none')
+@endsection
 
 @section('content')
 <!-- Breadcrumb Start -->
@@ -39,33 +45,14 @@
                                     <th class="product-name">Tên sản phẩm</th>
                                     <th class="product-name">Màu sắc</th>
                                     <th class="product-price">Giá tiền</th>
-                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-quantity">Số lượng</th>
                                     <th class="product-price">Khuyến mãi</th>
                                     <th class="product-subtotal">Thành tiền</th>
                                     <th class="product-remove">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @if(Session::has('cart'))
-                                @foreach(Session::get('cart')->products as $key => $cart)
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <a href="#"><img src="{{asset('backend/attribute_img/'.$cart['image'])}}" title="{{$cart['productName']}}" alt="{{$cart['productName']}}"></a>
-                                    </td>
-                                    <td class="product-name"><a href="#">{{$cart['productName']}}</a></td>
-                                    <td class="product-name"><a href="#">{{$cart['color']}}</a></td>
-                                    <td class="product-price"><span class="amount">{{number_format($cart['price'],0,".",".")}}<sup>đ</sup></span></td>
-                                    <td class="product-quantity"><input type="number" value="{{$cart['qty']}}" min="1"></td>
-                                    <td class="product-price"><span class="amount">{{number_format($cart['discount'],0,".",".")}}<sup>đ</sup></span></td>
-                                    <td class="product-subtotal">{{number_format(($cart['price']*$cart['qty'])-$cart['discount'],0,".",".")}}<sup>đ</sup></td>
-                                    <td class="product-remove"> <a href="#" id="delete-cart" data-id="{{$key}}" onclick="confirm('Bạn muốn xóa sản phẩm này không?')"><i class="fa fa-times" aria-hidden="true"></i></a></td>
-                                </tr>
-                                @endforeach
-                                @else
-                                <tr>
-                                    <td colspan="8" style="font-size: 20px;">Giỏ hàng đang trống</td>
-                                </tr>
-                            @endif
+                                @include('frontend.cart.content_cart')
                             </tbody>
                         </table>
                     </div>
@@ -92,7 +79,7 @@
                                         <tr class="order-total">
                                             <th>Tổng tiền</th>
                                             <td>
-                                                <strong><span class="amount">{{number_format(Session::get('cart')->totalPrice-Session::get('cart')->totalDiscount,0,".",".")}}</span></strong><sup>đ</sup>
+                                                <span class="amount" id="render-totalPrice">{{number_format(Session::get('cart')->totalPrice-Session::get('cart')->totalDiscount,0,".",".")}}</span><sup id="sup" style="border-bottom: 1px solid black; margin-left: 5px;font-weight: bold;">đ</sup>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -112,13 +99,13 @@
                                         <tr class="order-total">
                                             <th>Tổng tiền</th>
                                             <td>
-                                                <strong><span class="amount">0 <sup>đ</sup></span></strong>
+                                                <span class="amount">0</span><sup>đ</sup>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <div class="wc-proceed-to-checkout">
-                                    <a href="#">Proceed to Checkout</a>
+                                    <a href="{{route('home')}}">Quay lại mua hàng</a>
                                 </div>
                             </div>
                         </div>

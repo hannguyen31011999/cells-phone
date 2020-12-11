@@ -6,7 +6,7 @@
             <!-- Arrivals Product Activation Start Here -->
             <div class="like-pro-active owl-carousel">
             @foreach($product as $products)
-                @foreach($products->ProductDetails as $productDetail)
+                @foreach($products->ProductDetails as $key => $productDetail)
                 <!-- Double Product Start -->
                 <div class="double-product">
                     <!-- Single Product Start -->
@@ -36,8 +36,8 @@
                                     <a href="" title="Thêm vào giỏ hàng">Xem chi tiết</a>
                                 </div>
                                 <div class="actions-secondary">
-                                    <a href="compare.html" title="So sánh sản phẩm"><i class="lnr lnr-sync"></i> <span>Thêm so sánh</span></a>
-                                    <a href="wishlist.html" title="Yêu thích"><i class="lnr lnr-heart"></i> <span>Yêu thích</span></a>
+                                    <a href="#" id="add-compare" title="So sánh sản phẩm"><i class="lnr lnr-sync"></i> <span>Thêm so sánh</span></a>
+                                    <a href="#" id="add-wish" data-wish="{{$productDetail->id}}" title="Yêu thích"><i class="lnr lnr-heart"></i> <span>Yêu thích</span></a>
                                 </div>
                             </div>
                         </div>
@@ -58,5 +58,4 @@
 <!-- Lile Products Area End Here -->
 
 <div id="modal-product">
-    @include('frontend.home.modal_product')
 </div>

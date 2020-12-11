@@ -15,12 +15,11 @@ class PageController extends Controller
 
 	public function index()
 	{
-		// Session::forget('cart');
+		// Session::forget('wish');
 		$product = Product::orderBy('created_at','desc')
 							->with(['ProductDetails'])
 							->take(10)
 							->get();
-		// dd(Session('cart'));
 		$attribute = AttributeProduct::all(['image','product_detail_id']);
 		return view($this->module.'.index',compact('product','attribute'));
 	}

@@ -1,8 +1,8 @@
 <?php
+namespace App;
 
 class Wish{
 	public $products = null;
-
 	function __construct($wish)
 	{
 		if($wish){
@@ -12,7 +12,7 @@ class Wish{
 
 	public function addWish($product,$id)
 	{
-		$newProduct = ['productName'=>null,'price'=>0,'color'=>null,'image'=>null,'discount'=>0];
+		$newProduct = ['productName'=>null,'price'=>0,'image'=>null,'color'=>null];
 		if(!empty($this->products)){
 			if(array_key_exists($id,$this->products))
 			{
@@ -21,9 +21,8 @@ class Wish{
 		}
 		$newProduct['productName'] = $product['productName'];
 		$newProduct['price'] = $product['price'];
-		$newProduct['color'] = $product['color'];
 		$newProduct['image'] = $product['image'];
-		$newProduct['discount'] = $product['discount'];
+		$newProduct['color'] = $product['color'];
 		$this->products[$id] = $newProduct;
 	}
 

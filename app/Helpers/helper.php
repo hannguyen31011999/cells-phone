@@ -1,9 +1,15 @@
 <?php
 
-if (!function_exists('changPrice')) {
-    function changPrice($value)
+if (!function_exists('randomCode')) {
+    function randomCode($length)
     {
-    	return $value/1000;
+    	$characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+		$charactersLength = strlen($characters);
+		$random = '';
+		for ($i = 0; $i < $length; $i++) {
+        	$random .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $random;
     }
 }
 

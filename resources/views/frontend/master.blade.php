@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Home || Truemart Responsive Html5 Ecommerce Template</title>
+    <title>Smartphone Quận 9</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicons -->
     <link rel="shortcut icon" href="{{asset('frontend\img\favicon.ico')}}">
@@ -59,9 +59,9 @@
        <!-- Newsletter Popup Start -->
         <div class="popup_wrapper">
             <div class="test">
-                <span class="popup_off">Close</span>
+                <span class="popup_off">Đóng</span>
                 <div class="subscribe_area text-center mt-60">
-                    <h2>Newsletter</h2>
+                    <h2>Góp ý</h2>
                     <p>Subscribe to the Truemart mailing list to receive updates on new arrivals, special offers and other discount information.</p>
                     <div class="subscribe-form-group">
                         <form action="#">
@@ -76,18 +76,12 @@
                 </div>
             </div>
         </div>
-        <!-- Newsletter Popup End -->
-        <!-- Main Header Area Start Here -->
-        @include('frontend.header.header_master')
-        <!-- Main Header Area End Here -->
-        <!-- Categorie Menu & Slider Area Start Here -->
-        @include('frontend.banner.main_banner_master')
         
-        <!-- Categorie Menu & Slider Area End Here -->
-        <!-- Brand Banner Area Start Here -->
+        @yield('header')
+
+        @yield('categories')
+
         @yield('banner')
-        <!-- Brand Banner Area End Here -->
-        <!-- Hot Deal Products Start Here -->
 
         @yield('content')
 

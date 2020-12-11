@@ -15,14 +15,18 @@
                         </ul>
                         <!-- Dropdown End -->
                     </li>
-                    <li><a href="#">Tài khoản của bạn<i class="lnr lnr-chevron-down"></i></a>
-                        <!-- Dropdown Start -->
+                    @if(Auth::check()&&Auth::User()->role==0&&Auth::User()->status!=0)
+                    <li><a href="#">{{Auth::User()->email}}<i class="lnr lnr-chevron-down"></i></a>
                         <ul class="ht-dropdown">
-                            <li><a href="login.html">Đăng nhập</a></li>
-                            <li><a href="register.html">Đăng kí</a></li>
+                            <li><a href="{{url('account/profile')}}">Thông tin cá nhân</a></li>
+                            <li><a href="">Lịch sử mua hàng</a></li>
+                            <li><a href="{{route('logout')}}">Đăng xuất</a></li>
                         </ul>
-                        <!-- Dropdown End -->
-                    </li> 
+                    </li>
+                    @else
+                    <li><a href="{{url('account/register')}}">Đăng kí tài khoản</a>
+                    </li>
+                    @endif
                 </ul>
             </div>
             <!-- Header Top End -->
@@ -36,7 +40,7 @@
             <div class="row align-items-center no-gutters">
                 <div class="col-lg-3 col-md-12">
                     <div class="logo mb-all-30">
-                        <a href="index.html"><img src="{{asset('frontend\img\logo\logo.png')}}" alt="logo-image"></a>
+                        <a href="{{route('home')}}"><img src="{{asset('frontend\img\logo\logo.png')}}" alt="logo-image"></a>
                     </div>
                 </div>
                 <!-- Categorie Search Box Start Here -->
@@ -180,19 +184,22 @@
     <!-- Mobile Vertical Menu Start Here -->
     <div class="container d-block d-lg-none">
         <div class="vertical-menu mt-30">
-            <span class="categorie-title mobile-categorei-menu">Shop by Categories</span>
+            <span class="categorie-title mobile-categorei-menu">Danh mục sản phẩm</span>
             <nav>  
                 <div id="cate-mobile-toggle" class="category-menu sidebar-menu sidbar-style mobile-categorei-menu-list menu-hidden ">
                     <ul>
-                        <li class="has-sub"><a href="#">Phones & Tablets</a>
+                    @foreach($categories as $Categories)
+                        <li class="has-sub"><a href="#">{{$Categories->categories_name}}</a>
                             <ul class="category-sub">
-                                <li><a href="shop.html">phone one</a></li>
-                                <li><a href="shop.html">Tablet two</a></li>
-                                <li><a href="shop.html">Tablet three</a></li>
-                                <li><a href="shop.html">phone four</a></li>
+                                @foreach($product as $products)
+                                    @if($products->categories_id==$Categories->id)
+                                <li><a href="#">{{$products->product_name}}</a></li>
+                                    @endif
+                                @endforeach
                             </ul>
                             <!-- category submenu end-->
                         </li>
+                    @endforeach
                     </ul>
                 </div>
                 <!-- category-menu-end -->

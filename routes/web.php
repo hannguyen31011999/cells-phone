@@ -11,28 +11,108 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/','frontend\PageController@index')->name('home');
+Route::group(['namespace'=>'frontend'],function(){
 
-Route::get('/modal-detail-product','frontend\PageController@detailProduct');
+	// index 
+	Route::get('/','PageController@index')->name('home');
 
-Route::get('/change-color','frontend\PageController@changeColorProduct');
+	Route::get('/modal-detail-product','PageController@detailProduct');
 
-Route::get('/add-cart','frontend\CartController@addCart');
+	Route::get('/change-color','PageController@changeColorProduct');
 
-Route::get('/delete-cart','frontend\CartController@deleteCart');
+	// cart
+	Route::get('/add-cart','CartController@addCart');
 
-Route::get('/shopping-cart',function(){
-	return view('frontend.cart.shoppingcart');
+	Route::get('/update-cart','CartController@updateCart');
+
+	Route::get('/delete-cart','CartController@deleteCart');
+
+	Route::get('/shopping-cart',function(){
+		return view('frontend.cart.shoppingcart');
+	});
+
+	// Wish
+	Route::get('/add-wishlist','WishController@addWish');
+
+	Route::get('/delete-wishlist','WishController@deleteWish');
+
+	Route::get('/wish-list',function(){
+		return view('frontend.wish.page_wish');
+	});
+
+	// Compare
+
+
+	// Route logout
+	Route::get('/logout','LoginController@Logout')->name('logout');
+
+	// login admin
+	Route::post('/login','LoginController@Login');
 });
-// Route logout
-Route::get('/logout','frontend\LoginController@Logout');
+
+Route::group(['prefix'=>'account','namespace'=>'frontend'],function(){
+	// register
+	Route::get('/register',function(){
+		return view('frontend.register.page_register');
+	});
+
+
+	Route::post('/register','RegisterController@Register')->name('register');
+
+	// confirm account
+	Route::get('/confirm','RegisterController@confirmAccount');
+
+	Route::post('/confirm','RegisterController@Confirm')->name('confirm');
+
+	// login
+	Route::get('/login',function(){
+		return view('frontend.login.page_login');
+	});
+
+	Route::post('/login','LoginController@Login')->name('loginUser');
+
+	Route::group(['middleware'=>'CheckLogin'],function(){
+		// profile
+		Route::get('/profile',function(){
+			return view('frontend.profile.page_profile');
+		});
+
+		Route::post('/profile','ProfileController@updateProfile')->name('updateProfile');
+
+		// change password
+		Route::get('/change-password',function(){
+			return view('frontend.profile.page_changepassword');
+		});
+
+		Route::post('/change-password','ProfileController@updatePassword')->name('updatePassword');
+
+		// purchase
+		Route::get('/purchase','PurchaseController@index');
+
+		// messenger
+		Route::get('/purchase','MessengerController@index');
+	});
+
+	// recovery
+	Route::get('/recovery',function(){
+		return view('frontend.login.recovery');
+	});
+
+	Route::post('/recovery','LoginController@mailResetPassword')->name('resetPassword');
+
+	// reset password
+	Route::get('/reset','LoginController@viewRecovery');
+
+	Route::post('/reset','LoginController@confirmReset');
+});
 
 
 // Route login admin
 Route::get('/login',function(){
 	return view('backend.login.index_login');
 });
-Route::post('/login','frontend\LoginController@Login');
+
+Route::post('/login','LoginController@Login');
 
 // List route admin
 Route::group(['prefix'=>'admin','middleware'=>'CheckAdminLogin','namespace'=>'backend'],function(){
