@@ -1,27 +1,32 @@
 $(document).on('click', '.add-cart', function(e){
     var id_before = $('#id-attribute').val();
     var qty = $('.quantity').val();
-    $.ajax({
-        type: 'get',
-        url: '/add-cart',
-        data: {
-          "id":id_before,
-          "qty":qty
-        },
-        success: function(response) {
-            // var notification = alertify.notify('Thêm thành công sản phẩm', 'success',2, function(){  console.log('success');});
-            // $('.alertify-notifier').css('color','white');
-            $('#cart-render').empty().html(response);
-            $('#render-modal').text('Thêm sản phẩm vào giỏ hàng');
-            $('#modalSuccess').modal('show');
-            setTimeout(function(){ 
-                $('#modalSuccess').modal('hide');
-            },1000);
-        },
-        error: function (response) {
-            alert('Đã xảy ra lỗi! xin thử lại');
-        }
-    });
+    if(id_before===undefined){
+        alert('Chọn màu sản phẩm');
+    }else{
+        $.ajax({
+            type: 'get',
+            url: '/add-cart',
+            data: {
+              "id":id_before,
+              "qty":qty
+            },
+            success: function(response) {
+                // var notification = alertify.notify('Thêm thành công sản phẩm', 'success',2, function(){  console.log('success');});
+                // $('.alertify-notifier').css('color','white');
+                $('#cart-render').empty().html(response);
+                $('#render-modal').text('Thêm sản phẩm vào giỏ hàng');
+                $('#modalSuccess').modal('show');
+                setTimeout(function(){ 
+                    $('#modalSuccess').modal('hide');
+                },1000);
+            },
+            error: function (response) {
+                alert('Đã xảy ra lỗi! xin thử lại');
+            }
+        });
+    }
+    
     e.preventDefault();
 });
 

@@ -40,6 +40,8 @@ Route::group(['namespace'=>'frontend'],function(){
 		return view('frontend.wish.page_wish');
 	});
 
+	Route::get('change-wishlist','WishController@changeAttribute');
+
 	// Compare
 
 

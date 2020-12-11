@@ -41,6 +41,18 @@ class WishController extends Controller
         }
     }
 
+    public function changeAttribute(Request $request)
+    {
+        if($request->ajax()){
+            try{
+                $attribute = AttributeProduct::findOrFail($request->id_attribute);
+                return response()->json(['data'=>$attribute],200);
+            }catch(Exception $e){
+
+            }
+        }
+    }
+
     public function deleteWish($id)
     {
 
