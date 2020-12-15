@@ -47,6 +47,10 @@ class ProductDetailController extends Controller
             $product = Product::findOrFail($id)
                         ->ProductDetails()
                         ->create($request->all());
+            $name = $product->Products()->get('product_name')[0]->product_name."-".$product->rom."GB";
+            $product->slugs()->create(
+                ['product_id'=>$product->product_id,'url'=>utf8tourl($name)]
+            );
             return redirect()->route('product_detail.list',['id'=>$id])->with('success','Thêm sản phẩm thành công');
         }catch(Exception $e){
             return back()->with('error','Đã xảy ra lỗi! xin thử lại');
@@ -94,6 +98,8 @@ class ProductDetailController extends Controller
     public function destroy($id,$idDetail)
     {
         try{
+            ProductDetail::findOrFail($idDetail)->slugs()->delete();
+            ProductDetail::findOrFail($idDetail)->AttributeProducts()->delete();
             $product = Product::findOrFail($id);
             $product->ProductDetails()->findOrFail($idDetail)->delete();
             return redirect()->route('product_detail.list',['id'=>$product->id]);

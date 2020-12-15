@@ -11,6 +11,7 @@ use App\Model\ProductDetail;
 use App\Model\Product;
 class WishController extends Controller
 {
+    private $module = "frontend.wish";
     public function addWish(Request $request)
     {
         $oldWish = !empty(Session('wish')) ? Session('wish') : null;
@@ -53,8 +54,23 @@ class WishController extends Controller
         }
     }
 
-    public function deleteWish($id)
+    public function index(Request $request)
     {
+        $oldWish = !empty(Session('wish')) ? Session('wish') : null;
+        $newWish = new Wish($oldWish);
+        if(!empty($request->delete)){
+            try{
+                $newWish->deleteWish($request->delete);
+                Session(['wish'=>$newWish]);
+                if(count(Session('wish')->products)<1){
+                    Session::forget('wish');
+                }
+                return view('frontend.wish.page_wish');
+            }catch(Exception $e){
 
+            }
+        }else{
+            return view('frontend.wish.page_wish');
+        }
     }
 }

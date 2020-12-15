@@ -1,25 +1,28 @@
 <?php
 
-namespace App\Model;
+namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
-class ProductDetail extends Model
+
+class Slug extends Model
 {
-    protected $table = "product_detail";
+	protected $table = "slug";
 
     protected $primaryKey = "id";
+
+
+    public $timestamps = true;
 
     protected $fillable = [
     	'id',
     	'product_id',
-    	'price_product',
-    	'qty',
-    	'rom',
+    	'product_detail_id',
+        'url',
+    	'image',
     	'created_at',
         'updated_at',
+        'deleted_at'
     ];
-
-    public $timestamps = true;
 
     protected $casts = [
         'created_at'=>'datetime:d/m/Y - H:i',
@@ -29,16 +32,12 @@ class ProductDetail extends Model
     protected $dates = [
         'created_at',
         'updated_at',
+        'deleted_at'
     ];
 
-    public function AttributeProducts()
+    public function ProductDetails()
     {
-        return $this->hasMany('App\Model\AttributeProduct','product_detail_id','id');
-    }
-
-    public function slugs()
-    {
-        return $this->hasMany('App\Model\Slug','product_detail_id','id');
+        return $this->belongsTo('App\Model\ProductDetail','product_detail_id','id');
     }
 
     public function Products()

@@ -27,29 +27,28 @@ Route::group(['namespace'=>'frontend'],function(){
 
 	Route::get('/delete-cart','CartController@deleteCart');
 
-	Route::get('/shopping-cart',function(){
-		return view('frontend.cart.shoppingcart');
-	});
+	Route::get('/shopping-cart','CartController@index');
 
 	// Wish
 	Route::get('/add-wishlist','WishController@addWish');
 
-	Route::get('/delete-wishlist','WishController@deleteWish');
-
-	Route::get('/wish-list',function(){
-		return view('frontend.wish.page_wish');
-	});
+	Route::get('/wish-list','WishController@index');
 
 	Route::get('change-wishlist','WishController@changeAttribute');
-
+	
 	// Compare
+	Route::get('/compare','CompareController@index');
 
+	Route::get('/compare/{id}','CompareController@destroy');
 
 	// Route logout
 	Route::get('/logout','LoginController@Logout')->name('logout');
 
 	// login admin
 	Route::post('/login','LoginController@Login');
+
+	// product detail
+	Route::get('/product/{name}','ProductDetailController@index')->name('viewProductDetail');
 });
 
 Route::group(['prefix'=>'account','namespace'=>'frontend'],function(){
@@ -114,7 +113,7 @@ Route::get('/login',function(){
 	return view('backend.login.index_login');
 });
 
-Route::post('/login','LoginController@Login');
+Route::post('/login','frontend\LoginController@Login');
 
 // List route admin
 Route::group(['prefix'=>'admin','middleware'=>'CheckAdminLogin','namespace'=>'backend'],function(){

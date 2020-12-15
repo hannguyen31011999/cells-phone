@@ -13,7 +13,7 @@
                     <div class="single-product">
                         <!-- Product Image Start -->
                         <div class="pro-img">
-                            <a href="product.html">
+                            <a href="{{route('viewProductDetail',['name'=>utf8tourl($products->product_name.'-'.$productDetail->rom.'GB')])}}">
                             @foreach($attribute as $attributes)
                                 @if($attributes->product_detail_id==$productDetail->id)
                                     <img class="primary-img" src="{{asset('backend/attribute_img/'.$attributes->image)}}" alt="single-product">
@@ -33,10 +33,10 @@
                             </div>
                             <div class="pro-actions">
                                 <div class="actions-primary">
-                                    <a href="" title="Thêm vào giỏ hàng">Xem chi tiết</a>
+                                    <a href="{{route('viewProductDetail',['name'=>utf8tourl($products->product_name.'-'.$productDetail->rom.'GB')])}}" title="Xem chi tiết sản phẩm">Xem chi tiết</a>
                                 </div>
                                 <div class="actions-secondary">
-                                    <a href="#" id="add-compare" title="So sánh sản phẩm"><i class="lnr lnr-sync"></i> <span>Thêm so sánh</span></a>
+                                    <a href="{{url('/compare?action=add&categories_id='.$products->categories_id.'&product_id='.$products->id.'&compare_id='.$productDetail->id)}}" id="add-compare" title="So sánh sản phẩm"><i class="lnr lnr-sync"></i> <span>Thêm so sánh</span></a>
                                     <a href="#" id="add-wish" data-wish="{{$productDetail->id}}" title="Yêu thích"><i class="lnr lnr-heart"></i> <span>Yêu thích</span></a>
                                 </div>
                             </div>

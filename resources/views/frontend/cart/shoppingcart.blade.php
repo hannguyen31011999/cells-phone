@@ -61,10 +61,8 @@
                        <!-- Cart Button Start -->
                         <div class="col-md-8 col-sm-12">
                             <div class="buttons-cart">
-                            <form action="" method="">
-                                <input type="submit" value="Xóa tất cả giỏ hàng">
+                                <a href="{{url('shopping-cart?action=delete')}}">Xóa giỏ hàng</a>
                                 <a href="{{route('home')}}">Tiếp tục mua sắm</a>
-                            </form>
                             </div>
                         </div>
                         <!-- Cart Button Start -->

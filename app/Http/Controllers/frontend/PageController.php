@@ -15,7 +15,7 @@ class PageController extends Controller
 
 	public function index()
 	{
-		// Session::forget('wish');
+		// Session::forget('compare');
 		$product = Product::orderBy('created_at','desc')
 							->with(['ProductDetails'])
 							->take(10)

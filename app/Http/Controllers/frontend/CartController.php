@@ -15,6 +15,16 @@ class CartController extends Controller
 	private $module_cart = "frontend.cart";
 
 
+	public function index(Request $request)
+	{
+		if(!empty($request->action)){
+			Session::forget('cart');
+			return view('frontend.cart.shoppingcart');
+		}else{
+			return view('frontend.cart.shoppingcart');
+		}
+	}
+
 	public function addCart(Request $request)
 	{
 		$oldCart = !empty(Session('cart')) ? Session('cart') : null;
