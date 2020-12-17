@@ -50,6 +50,7 @@ class CreateReferenceFk extends Migration
         Schema::table('review', function ($table) {
             $table->foreign('user_id')->references('id')->on('user')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
+            $table->foreign('product_detail_id')->references('id')->on('product_detail')->onDelete('cascade');
         });
     }
 

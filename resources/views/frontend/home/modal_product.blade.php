@@ -1,8 +1,5 @@
 <!-- Quick View Content Start -->
 <div class="main-product-thumbnail quick-thumb-content">
-    @if(isset($attribute))
-    <input type="hidden" name="" id="id-attribute" value="{{$attribute[0]->id}}">
-    @endif
     <div class="container">
         <!-- The Modal -->
         <div class="modal fade" id="myModal">
@@ -49,7 +46,7 @@
                                     <div class="box-product">
                                     @if(isset($attribute))
                                         @foreach($attribute as $attributes)
-                                        <a id="{{$attributes->id}}" href="#" class="attribute">
+                                        <a id="color{{$attributes->id}}" data-id="{{$attributes->id}}" href="#" class="attribute">
                                             <span class="attribute-color">{{$attributes->color}}</span>
                                             <p class="linked-price">
                                                 {{number_format($attributes->price_attribute, 0, ".", ".")}}đ</p>

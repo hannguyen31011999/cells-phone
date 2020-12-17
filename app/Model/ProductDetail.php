@@ -45,4 +45,16 @@ class ProductDetail extends Model
     {
         return $this->belongsTo('App\Model\Product','product_id','id');
     }
+
+    public function CountReview()
+    {
+        return $this->hasMany('App\Model\Review','product_detail_id','id')->count();
+    }
+
+    public function CountStar($star)
+    {
+        return $this->hasMany('App\Model\Review','product_detail_id','id')
+                        ->where('point',$star)
+                        ->count();
+    }
 }

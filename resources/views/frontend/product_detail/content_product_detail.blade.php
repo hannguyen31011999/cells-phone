@@ -2,7 +2,7 @@
 <div class="main-product-thumbnail ptb-100 ptb-sm-60">
     <div class="container">
         <div class="thumb-bg">
-            <div class="row">
+            <div class="row" id="content-product-header">
                 <!-- Main Thumbnail Image Start -->
                 <div class="col-lg-5 mb-all-40">
                     <!-- Thumbnail Large Image start -->
@@ -10,7 +10,7 @@
                         @foreach($listImage as $key => $image)
                             @if($key==0)
                             <div id="thumb{{$key}}" class="tab-pane fade show active">
-                                <a data-fancybox="images" href="{{asset('backend/product_img/'.$image->image)}}"><img src="{{asset('backend/product_img/'.$image->image)}}" alt="Xem chi tiết hình ảnh"></a>
+                                <a data-fancybox="images" id="a-active" href="{{asset('backend/product_img/'.$image->image)}}"><img src="{{asset('backend/product_img/'.$image->image)}}" alt="Xem chi tiết hình ảnh" id="img-active"></a>
                             </div>
                             @else
                             <div id="thumb{{$key}}" class="tab-pane fade">
@@ -52,8 +52,8 @@
                                 <i class="fa fa-star-o"></i>
                             </div>
                             <div class="rating-feedback">
-                                <a href="#">(1 review)</a>
-                                <a href="#">add to your review</a>
+                                <a href="#">({{$countReview}} Bình Luận)</a>
+                                <a href="#comment">Thêm bình luận bên dưới</a>
                             </div>
                         </div>
                         <div class="pro-price mtb-30">
@@ -82,7 +82,7 @@
                             <label style="margin-bottom: 5px;">Chọn màu yêu thích</label>
                             <div class="box-product">
                                 @foreach($attribute as $attributes)
-                                <a id="{{$attributes->id}}" href="#" class="attribute">
+                                <a id="choose-color{{$attributes->id}}" href="#content" class="attribute" onclick="changeAttribute(<?php echo $attributes->id ?>)">
                                     <span class="attribute-color">{{$attributes->color}}</span>
                                     <p class="linked-price">
                                         {{number_format($attributes->price_attribute, 0, ".", ".")}}đ</p>
@@ -96,7 +96,7 @@
                             </form>
                             <div class="pro-actions">
                                 <div class="actions-primary">
-                                    <a href="cart.html" title="" data-original-title="Add to Cart"> + Thêm giỏ hàng</a>
+                                    <a href="#" title="Thêm giỏ hàng" class="add-cart" id="" data-original-title="Add to Cart"> + Thêm giỏ hàng</a>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                         </div>
                         <div class="socila-sharing mt-25">
                             <ul class="d-flex">
-                                <li>share</li>
+                                <li>Chia sẻ</li>
                                 <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fa fa-google-plus-official" aria-hidden="true"></i></a></li>

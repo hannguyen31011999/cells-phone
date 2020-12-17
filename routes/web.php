@@ -48,7 +48,9 @@ Route::group(['namespace'=>'frontend'],function(){
 	Route::post('/login','LoginController@Login');
 
 	// product detail
-	Route::get('/product/{name}','ProductDetailController@index')->name('viewProductDetail');
+	Route::get('/{name}','ProductDetailController@index')->name('viewProductDetail');
+
+	Route::post('/{name}','ProductDetailController@voteReview')->name('uploadReview');
 });
 
 Route::group(['prefix'=>'account','namespace'=>'frontend'],function(){

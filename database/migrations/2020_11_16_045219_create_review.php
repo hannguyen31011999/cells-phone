@@ -15,8 +15,12 @@ class CreateReview extends Migration
     {
         Schema::create('review', function (Blueprint $table) {
             $table->Increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->integer('user_id')->nullable()->unsigned();
             $table->integer('product_id')->unsigned();
+            $table->integer('product_detail_id')->unsigned();
+            $table->string('email');
+            $table->string('name');
+            $table->char('phone',10);
             $table->integer('point');
             $table->text('content');
             $table->integer('status');

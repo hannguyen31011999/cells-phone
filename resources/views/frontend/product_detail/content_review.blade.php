@@ -4,110 +4,67 @@
         <div class="row">
             <div class="col-sm-12">
                 <ul class="main-thumb-desc nav tabs-area" role="tablist">
-                    <li><a class="active" data-toggle="tab" href="#dtail">Product Details</a></li>
-                    <li><a data-toggle="tab" href="#review">Reviews 1</a></li>
+                    <li><a class="active" data-toggle="tab" href="#dtail">Mô tả sản phẩm</a></li>
+                    <li><a data-toggle="tab" href="#review" id="comment">Bình luận đánh giá</a></li>
                 </ul>
                 <!-- Product Thumbnail Tab Content Start -->
                 <div class="tab-content thumb-content border-default">
                     <div id="dtail" class="tab-pane fade show active">
-                        <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
+                        @if(isset($products))
+                            {!! $products->desc !!}
+                        @endif
                     </div>
                     <div id="review" class="tab-pane fade">
                         <!-- Reviews Start -->
-                        <div class="review border-default universal-padding">
-                            <div class="group-title">
-                                <h2>customer review</h2>
-                            </div>
-                            <h4 class="review-mini-title">Truemart</h4>
-                            <ul class="review-list">
-                                <!-- Single Review List Start -->
-                                <li>
-                                    <span>Quality</span>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <label>Truemart</label>
-                                </li>
-                                <!-- Single Review List End -->
-                                <!-- Single Review List Start -->
-                                <li>
-                                    <span>price</span>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <label>Review by <a href="https://themeforest.net/user/hastech">Truemart</a></label>
-                                </li>
-                                <!-- Single Review List End -->
-                                <!-- Single Review List Start -->
-                                <li>
-                                    <span>value</span>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <label>Posted on 7/20/18</label>
-                                </li>
-                                <!-- Single Review List End -->
-                            </ul>
+                        <div class="review border-default universal-padding" id="render-review">
+                            @include('frontend.product_detail.render_review')
                         </div>
                         <!-- Reviews End -->
                         <!-- Reviews Start -->
                         <div class="review border-default universal-padding mt-30">
-                            <h2 class="review-title mb-30">You're reviewing: <br><span>Faded Short Sleeves T-shirt</span></h2>
-                            <p class="review-mini-title">your rating</p>
+                            <h2 class="review-title mb-30">Đánh Giá Về Sản Phẩm</h2>
+                            <p class="review-mini-title">Đánh Giá Của Bạn</p>
                             <ul class="review-list">
                                 <!-- Single Review List Start -->
                                 <li>
-                                    <span>Quality</span>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
+                                    <ul class="ratings">
+                                        <li class="star" id="5"></li>
+                                        <li class="star" id="4"></li>
+                                        <li class="star" id="3"></li>
+                                        <li class="star" id="2"></li>
+                                        <li class="star" id="1"></li>
+                                    </ul>
                                 </li>
-                                <!-- Single Review List End -->
-                                <!-- Single Review List Start -->
-                                <li>
-                                    <span>price</span>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </li>
-                                <!-- Single Review List End -->
-                                <!-- Single Review List Start -->
-                                <li>
-                                    <span>value</span>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </li>
-                                <!-- Single Review List End -->
+                                <div class="messenger-errors">
+                                    <div id="msg4"></div>
+                                </div>
                             </ul>
                             <!-- Reviews Field Start -->
                             <div class="riview-field mt-40">
-                                <form autocomplete="off" action="#">
+                                <form action="{{route('uploadReview',['url'=>$slug[0]->url])}}" method="post" id="review-sp" data-url="{{$slug[0]->url}}" product-id="{{$products->id}}" product-detail-id="{{$productDetail->id}}">
+                                    @csrf
                                     <div class="form-group">
-                                        <label class="req" for="sure-name">Nickname</label>
-                                        <input type="text" class="form-control" id="sure-name" required="required">
+                                        <label class="req" for="sure-name">Họ tên khách hàng</label>
+                                        <input type="text" class="form-control" id="name">
+                                        <div class="messenger-errors">
+                                            <div id="msg1"></div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="req" for="subject">Summary</label>
-                                        <input type="text" class="form-control" id="subject" required="required">
+                                        <label class="req" for="subject">Email</label>
+                                        <input type="text" class="form-control" id="email">
+                                        <div class="messenger-errors">
+                                            <div id="msg2"></div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="req" for="comments">Review</label>
-                                        <textarea class="form-control" rows="5" id="comments" required="required"></textarea>
+                                        <label class="req" for="comments">Bình luận</label>
+                                        <textarea class="form-control" rows="5" id="comment"></textarea>
+                                        <div class="messenger-errors">
+                                            <div id="msg3"></div>
+                                        </div>
                                     </div>
-                                    <button type="submit" class="customer-btn">Submit Review</button>
+                                    <button type="submit" class="customer-btn">Gửi Đóng Góp</button>
                                 </form>
                             </div>
                             <!-- Reviews Field Start -->

@@ -53,6 +53,11 @@ class Product extends Model
         return $this->hasMany("App\Model\ProductDetail",'product_id','id');
     }
 
+    public function AttributeProducts()
+    {
+        return $this->hasMany('App\Model\AttributeProduct','product_id','id');
+    }
+
     public function ListImages()
     {
         return $this->hasMany('App\Model\ListImage','product_id','id');

@@ -13,6 +13,22 @@ if (!function_exists('randomCode')) {
     }
 }
 
+if (!function_exists('firstChar')) {
+    function firstChar($string)
+    {
+    	$temp = explode(" ", $string);
+    	$temp1 = end($temp);
+		$length = strlen($temp1);
+		$char = "";
+		for ($i = 0; $i < $length; $i++) {
+			if($i==0){
+				$char = $temp1[$i];
+				return $char;
+			}
+	    }
+    }
+}
+
 if (! function_exists('utf8convert')) {
 		function utf8convert($str) {
 		    if(!$str) return false;

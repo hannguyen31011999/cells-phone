@@ -1,7 +1,7 @@
 $(document).on('click', '.add-cart', function(e){
-    var id_before = $('#id-attribute').val();
+    var id_before = $('.add-cart').attr('id');
     var qty = $('.quantity').val();
-    if(id_before===undefined){
+    if(id_before===""){
         alert('Chọn màu sản phẩm');
     }else{
         $.ajax({
@@ -26,7 +26,6 @@ $(document).on('click', '.add-cart', function(e){
             }
         });
     }
-    
     e.preventDefault();
 });
 
