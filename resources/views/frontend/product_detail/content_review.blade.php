@@ -43,27 +43,37 @@
                             <div class="riview-field mt-40">
                                 <form action="{{route('uploadReview',['url'=>$slug[0]->url])}}" method="post" id="review-sp" data-url="{{$slug[0]->url}}" product-id="{{$products->id}}" product-detail-id="{{$productDetail->id}}">
                                     @csrf
-                                    <div class="form-group">
-                                        <label class="req" for="sure-name">Họ tên khách hàng</label>
-                                        <input type="text" class="form-control" id="name">
-                                        <div class="messenger-errors">
-                                            <div id="msg1"></div>
+                                    @if(Auth::check())
+                                        <div class="form-group">
+                                            <label class="req" for="comments">Bình luận</label>
+                                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                                            <div class="messenger-errors">
+                                                <div id="msg3"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="req" for="subject">Email</label>
-                                        <input type="text" class="form-control" id="email">
-                                        <div class="messenger-errors">
-                                            <div id="msg2"></div>
+                                    @else
+                                        <div class="form-group">
+                                            <label class="req" for="sure-name">Họ tên khách hàng</label>
+                                            <input type="text" class="form-control" id="name">
+                                            <div class="messenger-errors">
+                                                <div id="msg1"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="req" for="comments">Bình luận</label>
-                                        <textarea class="form-control" rows="5" id="comment"></textarea>
-                                        <div class="messenger-errors">
-                                            <div id="msg3"></div>
+                                        <div class="form-group">
+                                            <label class="req" for="subject">Email</label>
+                                            <input type="text" class="form-control" id="email">
+                                            <div class="messenger-errors">
+                                                <div id="msg2"></div>
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="form-group">
+                                            <label class="req" for="comments">Bình luận</label>
+                                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                                            <div class="messenger-errors">
+                                                <div id="msg3"></div>
+                                            </div>
+                                        </div>
+                                    @endif
                                     <button type="submit" class="customer-btn">Gửi Đóng Góp</button>
                                 </form>
                             </div>

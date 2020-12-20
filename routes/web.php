@@ -51,6 +51,9 @@ Route::group(['namespace'=>'frontend'],function(){
 	Route::get('/{name}','ProductDetailController@index')->name('viewProductDetail');
 
 	Route::post('/{name}','ProductDetailController@voteReview')->name('uploadReview');
+
+	// checkout
+	Route::get('/shopping-cart/checkout','CheckoutController@index');
 });
 
 Route::group(['prefix'=>'account','namespace'=>'frontend'],function(){

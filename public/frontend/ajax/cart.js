@@ -12,8 +12,6 @@ $(document).on('click', '.add-cart', function(e){
               "qty":qty
             },
             success: function(response) {
-                // var notification = alertify.notify('Thêm thành công sản phẩm', 'success',2, function(){  console.log('success');});
-                // $('.alertify-notifier').css('color','white');
                 $('#cart-render').empty().html(response);
                 $('#render-modal').text('Thêm sản phẩm vào giỏ hàng');
                 $('#modalSuccess').modal('show');
@@ -22,7 +20,11 @@ $(document).on('click', '.add-cart', function(e){
                 },1000);
             },
             error: function (response) {
-                alert('Đã xảy ra lỗi! xin thử lại');
+                if(response.responseJSON.messenger!==null){
+                    alert(response.responseJSON.messenger);
+                }else{
+                    alert('Đã xảy ra lỗi! xin thử lại');
+                }
             }
         });
     }
@@ -86,7 +88,15 @@ $(document).on('change', 'input[name=changeQuantity]', function(e){
                 $('.render-totalprice').text((response.data.totalPrice-response.data.totalDiscount).toLocaleString('vi-VN', {style: 'currency',currency:'VND'}));
             },
             error: function (response) {
-                alert('Đã xảy ra lỗi! xin thử lại');
+                if(response.responseJSON.messenger!==null){
+                    var data = response.responseJSON.data;
+                    $.each(data.products,function(key,value){
+                        $('#change-quantity'+key).val(value.qty);
+                    });
+                    alert(response.responseJSON.messenger);
+                }else{
+                    alert('Đã xảy ra lỗi! xin thử lại');
+                }
             }
         });
     }else{

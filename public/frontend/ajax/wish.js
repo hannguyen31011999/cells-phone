@@ -64,7 +64,11 @@ function addCart(id){
                 $('#cart-render').empty().html(response);
             },
             error: function (response) {
-                alert('Đã xảy ra lỗi! xin thử lại');
+                if(response.responseJSON.messenger!==null){
+                    alert(response.responseJSON.messenger);
+                }else{
+                    alert('Đã xảy ra lỗi! xin thử lại');
+                }
             }
         });
     }

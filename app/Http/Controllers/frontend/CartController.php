@@ -32,19 +32,29 @@ class CartController extends Controller
 		if($request->ajax())
 		{
 			try{
-				$attribute = AttributeProduct::findOrFail($request->id);
-				$productName = $attribute->Products()->get(['product_name'])[0]->product_name." ".$attribute->ProductDetails()->get(['rom'])[0]->rom."GB";
-				$price = $attribute->price_attribute;
-				$discount = Product::findOrFail($attribute->Products()->get(['id'])[0]->id)
-										->Discounts()->get(['discount_value'])[0]
-										->discount_value;
-				$color = $attribute->color;
-				$image = $attribute->image;
-				$qty = $request->qty;
-				$product = ['productName'=>$productName,'price'=>$price,'color'=>$color,'image'=>$image,'discount'=>$discount,'qty'=>$qty];
-				$newCart->addCart($product,$request->id);
-				Session(['cart'=>$newCart]);
-				return view($this->module.".cart");
+				$quantity = AttributeProduct::findOrFail($request->id)->qty;
+				$temp = !empty(Session('cart')->products[$request->id]['qty']) ? Session('cart')->products[$request->id]['qty'] : 0;
+				if($quantity<=(int)$request->qty){
+					return response()->json(['messenger'=>'Sản phẩm không đủ hàng'],500); 
+				}else{
+					if(Session::has('cart')&&$quantity<=($temp+$request->qty)){
+						return response()->json(['messenger'=>'Sản phẩm không đủ hàng'],500);
+					}else{
+						$attribute = AttributeProduct::findOrFail($request->id);
+						$productName = $attribute->Products()->get(['product_name'])[0]->product_name." ".$attribute->ProductDetails()->get(['rom'])[0]->rom."GB";
+						$price = $attribute->price_attribute;
+						$discount = Product::findOrFail($attribute->Products()->get(['id'])[0]->id)
+												->Discounts()->get(['discount_value'])[0]
+												->discount_value;
+						$color = $attribute->color;
+						$image = $attribute->image;
+						$qty = $request->qty;
+						$product = ['productName'=>$productName,'price'=>$price,'color'=>$color,'image'=>$image,'discount'=>$discount,'qty'=>$qty];
+						$newCart->addCart($product,$request->id);
+						Session(['cart'=>$newCart]);
+						return view($this->module.".cart");
+					}
+				}
 			}catch(Exception $e){
 				return response()->json(['messenger'=>'Thêm giỏ hàng thất bại'],500);
 			}
@@ -57,9 +67,14 @@ class CartController extends Controller
 		$newCart = new Cart($oldCart);
 		if($request->ajax())
 		{
-			$newCart->updateCart($request->id,$request->qty);
-			Session(['cart'=>$newCart]);
-			return response()->json(['data'=>Session('cart')],200);
+			$quantity = AttributeProduct::findOrFail($request->id)->qty;
+			if($quantity<($oldCart->products[$request->id]['qty']+$request->qty)){
+				return response()->json(['messenger'=>'Sản phẩm không đủ hàng','data'=>Session('cart')],500); 
+			}else{
+				$newCart->updateCart($request->id,$request->qty);
+				Session(['cart'=>$newCart]);
+				return response()->json(['data'=>Session('cart')],200);
+			}
 		}
 	}
 

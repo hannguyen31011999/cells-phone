@@ -14,7 +14,9 @@
                 <div class="single-product">
                     <!-- Product Image Start -->
                     <div class="pro-img">
-                        <a href="product.html">
+                    @foreach($value->Slugs as $slug)
+                        @if($slug->product_detail_id==$product->id)
+                        <a href="{{$slug->url}}">
                             @foreach($value->AttributeProducts as $image)
                                 @if($image->product_detail_id==$product->id)
                                     <img class="primary-img" src="{{asset('backend/product_img/'.$image->image)}}" alt="{{$value->product_name.' '.$product->rom.'GB'}}" title="{{$value->product_name.' '.$product->rom.'GB'}}">
@@ -22,6 +24,8 @@
                                 @endif
                             @endforeach
                         </a>
+                        @endif
+                    @endforeach
                     </div>
                     <!-- Product Image End -->
                     <!-- Product Content Start -->

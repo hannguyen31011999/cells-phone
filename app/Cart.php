@@ -37,7 +37,7 @@ class Cart{
 		$newProduct['image'] = $product['image'];
 		$newProduct['discount'] = $product['discount']*$product['qty'];
 		$this->products[$id] = $newProduct;
-		$this->totalPrice += $product['price']*$product['qty'];
+		$this->totalPrice += $product['price']*$product['qty']-$newProduct['discount'];
 		$this->totalDiscount += $newProduct['discount'];
 		$this->totalQuantity += $product['qty'];
 	}

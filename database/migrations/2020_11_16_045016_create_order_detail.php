@@ -17,6 +17,7 @@ class CreateOrderDetail extends Migration
             $table->Increments('id');
             $table->integer('order_id')->unsigned();
             $table->integer('product_id')->unsigned();
+            $table->integer('attribute_product_id')->unsigned();
             $table->tinyInteger('qty');
             $table->integer('product_price');
             $table->softDeletes();

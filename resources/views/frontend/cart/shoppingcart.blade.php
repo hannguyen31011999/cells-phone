@@ -83,7 +83,7 @@
                                     </tbody>
                                 </table>
                                 <div class="wc-proceed-to-checkout">
-                                    <a href="#">Tiến hành thanh toán</a>
+                                    <a href="{{url('shopping-cart/checkout')}}">Tiến hành thanh toán</a>
                                 </div>
                             </div>
                         </div>

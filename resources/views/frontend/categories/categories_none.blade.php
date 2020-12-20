@@ -16,7 +16,7 @@
                                         <ul>
                                         @foreach($product as $products)
                                             @if($products->categories_id==$Categories->id)
-                                                <li><a href="shop.html">{{$products->product_name}}</a></li>
+                                                <li><a href="">{{$products->product_name}}</a></li>
                                             @endif
                                         @endforeach
                                         </ul>

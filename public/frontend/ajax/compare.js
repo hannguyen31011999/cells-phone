@@ -8,7 +8,6 @@ function changeAttribute(id){
           "id_attribute":id_attribute
         },
         success: function(response) {
-            console.log(response);
             $('#choose-color'+id).blur();
             $('#add-cart'+id).attr('data-id',id_attribute);
             $('#amount'+id).text(response.data.price_attribute.toLocaleString('vi-VN', {style: 'currency',currency:'VND'}));

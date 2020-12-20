@@ -30,10 +30,10 @@
                    <ul class="price-content">
                        <li>Thành tiền<span class="render-subtotal">{{number_format(Session::get('cart')->totalPrice,0,".",".")}}<sup>đ</sup></span></li>
                        <li>Tổng khuyến mãi<span class="render-totaldiscount">{{number_format(Session::get('cart')->totalDiscount,0,".",".")}}<sup>đ</sup></span></li>
-                       <li>Tổng tiền<span class="render-totalprice">{{number_format(Session::get('cart')->totalPrice-Session::get('cart')->totalDiscount,0,".",".")}}<sup>đ</sup></span></li>
+                       <li>Tổng tiền<span class="render-totalprice">{{number_format(Session::get('cart')->totalPrice,0,".",".")}}<sup>đ</sup></span></li>
                    </ul>
                     <div class="cart-actions text-center">
-                        <a class="cart-checkout" href="">Thanh toán</a>
+                        <a class="cart-checkout" href="{{url('shopping-cart/checkout')}}">Thanh toán</a>
                     </div>
                 </div>
                 <!-- Cart Footer Inner End -->
