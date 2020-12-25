@@ -24,6 +24,7 @@ class Order extends Model
     	'phone',
     	'address',
     	'status',
+        'price_ship',
     	'total_price',
     	'created_at',
         'updated_at',
@@ -40,4 +41,14 @@ class Order extends Model
         'updated_at',
         'deleted_at'
     ];
+
+    public function OrderDetails()
+    {
+        return $this->hasMany("App\Model\OrderDetail",'order_id','id');
+    }
+
+    public function Users()
+    {
+        return $this->belongsTo("App\Model\User",'user_id','id');
+    }
 }

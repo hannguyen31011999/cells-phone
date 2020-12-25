@@ -54,6 +54,8 @@ Route::group(['namespace'=>'frontend'],function(){
 
 	// checkout
 	Route::get('/shopping-cart/checkout','CheckoutController@index');
+
+	Route::post('/shopping-cart/checkout','CheckoutController@createOrder')->name('createOrder');
 });
 
 Route::group(['prefix'=>'account','namespace'=>'frontend'],function(){
@@ -93,10 +95,10 @@ Route::group(['prefix'=>'account','namespace'=>'frontend'],function(){
 		Route::post('/change-password','ProfileController@updatePassword')->name('updatePassword');
 
 		// purchase
-		Route::get('/purchase','PurchaseController@index');
+		Route::get('/purchase','PurchaseController@index')->name('viewPurchase');
 
 		// messenger
-		Route::get('/purchase','MessengerController@index');
+		Route::get('/messenger','MessengerController@index');
 	});
 
 	// recovery

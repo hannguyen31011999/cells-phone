@@ -48,6 +48,5 @@
 
 @section('js')
 
-<script src="{{asset('js\jquery.min.js')}}"></script>
 <script src="{{asset('frontend/ajax/cart.js')}}"></script>
 @endsection

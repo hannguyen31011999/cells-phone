@@ -44,7 +44,6 @@ class CreateReferenceFk extends Migration
 
         Schema::table('order_detail', function ($table) {
             $table->foreign('order_id')->references('id')->on('order')->onDelete('cascade');
-            $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
             $table->foreign('attribute_product_id')->references('id')->on('attribute_product')->onDelete('cascade');
         });
 

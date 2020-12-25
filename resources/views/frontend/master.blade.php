@@ -33,10 +33,8 @@
     <link rel="stylesheet" href="{{asset('frontend\style.css')}}">
     <!-- Responsive css -->
     <link rel="stylesheet" href="{{asset('frontend\css\responsive.css')}}">
-
     <!-- alertifyJS -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-    
     @yield('css')
 
 </head>
@@ -146,7 +144,7 @@
     </div>
     <!-- Main Wrapper End Here -->
 
-    @yield('js')
+    
 
     <!-- jquery 3.2.1 -->
     <script src="{{asset('frontend\js\vendor\jquery-3.2.1.min.js')}}"></script>
@@ -180,6 +178,7 @@
 
     <!-- alertifyJS -->
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    @yield('js')
 </body>
 
 </html>

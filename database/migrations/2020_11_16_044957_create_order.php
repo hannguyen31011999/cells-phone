@@ -23,7 +23,8 @@ class CreateOrder extends Migration
             $table->char('phone',10);
             $table->string('address');
             $table->tinyInteger('status');
-            $table->float('total_price');
+            $table->integer('price_ship');
+            $table->integer('total_price');
             $table->softDeletes();
             $table->timestamps();
         });

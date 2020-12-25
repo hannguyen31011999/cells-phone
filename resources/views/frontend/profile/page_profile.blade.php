@@ -36,7 +36,7 @@
                     <nav class="side-menu">
                         <ul class="nav">
                             <li class="active"><a href=""><span class="fa fa-user"></span> Tài Khoản Của Tôi</a></li>
-                            <li><a href="#"><span class="fa fa-shopping-cart"></span> Đơn mua</a></li>
+                            <li><a href="{{url('account/purchase')}}"><span class="fa fa-shopping-cart"></span> Đơn mua</a></li>
                             <li><a href="#"><span class="fa fa-envelope"></span> Thông báo</a></li>
                             <li><a href="{{url('account/change-password')}}"><span class="fa fa-key"></span> Thay đổi mật khẩu</a></li>
                             <li><a href="{{route('logout')}}"><span class="fa fa-sign-out"></span> Đăng xuất</a></li>
@@ -150,7 +150,6 @@
 @endsection
 
 @section('js')
-<script src="{{asset('js\jquery.min.js')}}"></script>
 <script src="{{asset('frontend/ajax/cart.js')}}"></script>
 <script src="{{asset('frontend/ajax/profile.js')}}"></script>
 @endsection

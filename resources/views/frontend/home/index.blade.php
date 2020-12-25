@@ -34,10 +34,6 @@
     @include('frontend.categories.categories_master')
 @endsection
 
-@section('banner')
-    @include('frontend.banner.banner_master')
-@endsection
-
 @section('content')
 
 @include('frontend.home.content_product')
@@ -59,8 +55,8 @@
 
 @section('js')
 
-<script src="{{asset('js\jquery.min.js')}}"></script>
 <script src="{{asset('frontend/ajax/cart.js')}}"></script>
 <script src="{{asset('frontend/ajax/quickview.js')}}"></script>
 <script src="{{asset('frontend/ajax/wish.js')}}"></script>
+
 @endsection

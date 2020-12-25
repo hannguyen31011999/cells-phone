@@ -43,6 +43,8 @@ $(document).on('click', '#delete-cart', function(e){
             $('#cart-render').empty().html(response);
             if(window.location.href == "http://localhost:8000/shopping-cart"){
                 window.location.href = "/shopping-cart";
+            }else if(window.location.href == "http://localhost:8000/shopping-cart/checkout"){
+                window.location.href = "/shopping-cart/checkout";
             }
         },
         error: function (response) {

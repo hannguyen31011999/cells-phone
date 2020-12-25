@@ -117,7 +117,12 @@ button:focus {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-}s
+}
+.messenger-errors{
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
 </style>
 @endsection
 
@@ -146,6 +151,15 @@ button:focus {
 <!-- content checkout -->
 <div class="container px-4 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
+        <div class="col-12">
+            @if(Session::has('error'))
+                <div class="alert alert-danger" style="text-align: center;">
+                    <h5>{{Session::get('error')}}</h5>
+                </div>
+            @endif
+        </div>
+    </div><br>
+    <div class="row d-flex justify-content-center">
         <div class="col-5">
             <h4 class="heading">Chi tiết đơn hàng</h4>
         </div>
@@ -168,28 +182,32 @@ button:focus {
                 </tr>
             </thead>
             <tbody>
-              @if(Session::has('cart'))
-                  @foreach(Session::get('cart')->products as $key => $cart)
-                  <tr>
-                      <td class="product-thumbnail">
-                          <a href="#"><img src="{{asset('backend/attribute_img/'.$cart['image'])}}" title="{{$cart['productName']}}" alt="{{$cart['productName']}}"></a>
-                      </td>
-                      <td class="product-name"><a href="#">{{$cart['productName']}}</a></td>
-                      <td class="product-name"><a href="#">{{$cart['color']}}</a></td>
-                      <td class="product-price"><span class="amount">{{number_format($cart['price'],0,".",".")}}<sup>đ</sup></span></td>
-                      <td class="product-quantity"><input type="number" value="{{$cart['qty']}}" style="text-align: center;" disabled></td>
-                      <td class="product-price"><span class="amount">{{number_format($cart['discount'],0,".",".")}}<sup>đ</sup></span></td>
-                      <td class="product-subtotal"><span>{{number_format(($cart['price']*$cart['qty'])-$cart['discount'],0,".",".")}}<sup>đ</sup></span></td>
-                  </tr>
-                  @endforeach
-              @endif
+            @if(Session::has('cart'))
+                @foreach(Session::get('cart')->products as $key => $cart)
+                <tr>
+                    <td class="product-thumbnail">
+                        <a href="#"><img src="{{asset('backend/attribute_img/'.$cart['image'])}}" title="{{$cart['productName']}}" alt="{{$cart['productName']}}"></a>
+                    </td>
+                    <td class="product-name"><a href="#">{{$cart['productName']}}</a></td>
+                    <td class="product-name"><a href="#">{{$cart['color']}}</a></td>
+                    <td class="product-price"><span class="amount">{{number_format($cart['price'],0,".",".")}}<sup>đ</sup></span></td>
+                    <td class="product-quantity"><input type="number" value="{{$cart['qty']}}" style="text-align: center;" disabled></td>
+                    <td class="product-price"><span class="amount">{{number_format($cart['discount'],0,".",".")}}<sup>đ</sup></span></td>
+                    <td class="product-subtotal"><span>{{number_format(($cart['price']*$cart['qty'])-$cart['discount'],0,".",".")}}<sup>đ</sup></span></td>
+                </tr>
+                @endforeach
+            @else
+                <tr>
+                    <th colspan="7"><h4>Giỏ hàng đang trống <br></h4><a href="{{route('home')}}">quay lại mua hàng</a></th>
+                </tr>
+            @endif
             </tbody>
           </table>
         </div>
     </div>
     <!-- end order -->
     <br></br>
-    
+    @if(Session::has('cart'))
     <div class="row d-flex justify-content-center">
         <div class="col-5">
             <h4 class="heading">Thông tin giao nhận</h4>
@@ -200,70 +218,17 @@ button:focus {
 
     <!-- info customer -->
     <div class="row justify-content-center">
-      <form action="" method="post">
+      <form action="{{route('createOrder')}}" method="post">
+        @csrf
         <div class="col-lg-12">
             <div class="card">
                 <div class="row">
                     <!-- info customer -->
-                    <div class="col-lg-12">
-                        <div class="row px-6">
-                            <div class="form-group col-md-6"> 
-                              <label class="form-control-label">Họ tên khách hàng</label> <input type="text" class="form-control" id="name" name="name" placeholder="Nhập đầy đủ họ tên"> 
-                            </div>
-                            <div class="form-group col-md-6"> 
-                              <label class="form-control-label">Địa chỉ email</label> 
-                              <input type="text" class="form-control" id="email" name="email" placeholder="Email của khách hàng"> 
-                            </div>
-                        </div>
-                        <div class="row px-6">
-                            <div class="form-group col-md-6"> 
-                              <label class="form-control-label">Số điện thoại</label> 
-                              <input type="text" class="form-control"  name="phone" placeholder="Số điện thoại khách hàng"> 
-                            </div>
-                            <div class="form-group col-md-6">
-                              <div class="row">
-                                  <div class="form-group col-md-4"> 
-                                    <label class="form-control-label">TP/Tỉnh</label> 
-                                    <select class="form-control" name="province" id="choose-province">
-                                        <option>-- Chọn TP/Tỉnh --</option>
-                                        @foreach($province as $provinces)
-                                          <option value="{{$provinces->id}}">
-                                            {{$provinces->name}}
-                                          </option>
-                                        @endforeach
-                                    </select>
-                                  </div>
-                                  <div class="form-group col-md-4" id="form-district"> 
-                                    <label class="form-control-label">Quận/Huyện</label>
-                                    <div id="render-district">
-                                        <select class="form-control" name="district" id="choose-district">
-                                        </select>
-                                    </div>
-                                  </div>
-                                  <div class="form-group col-md-4"> 
-                                    <label class="form-control-label">Phường/Xã</label>
-                                    <div id="render-ward">
-                                        <select class="form-control" id="choose-ward">
-                                        </select>
-                                    </div>
-                                  </div>
-                              </div>
-                          </div>
-                        </div>
-                        <div class="row px-12">
-                            <div class="form-group col-md-12">
-                                <label class="form-control-label">Địa chỉ cụ thể</label> 
-                                <input type="text" class="form-control" id="exp" name="exp" placeholder="Địa chỉ cụ thể khách hàng"> 
-                            </div>
-                        </div>
-                        <div class="row px-12">
-                            <div class="form-group col-md-12">
-                                <label class="form-control-label">Ghi chú</label> 
-                                <textarea class="form-control" rows="5" name="note">
-                                </textarea>
-                            </div>
-                        </div>
-                    </div>
+                    @if(Auth::check())
+                        @include('frontend.checkout.page_account')
+                    @else
+                        @include('frontend.checkout.page_customer')
+                    @endif
                     <!-- end info customer -->
                     <!-- payment -->
                     <div class="col-lg-4"></div>
@@ -289,11 +254,33 @@ button:focus {
                         </div>
                         <div class="row d-flex justify-content-between px-4">
                             <p class="mb-1 text-left">Phí Ship</p>
+                            @if(Auth::check())
+                            <h6 class="mb-1 text-right" id="render-ship">{{number_format(20000,0,'.','.')}}<sup>đ</sup></h6>
+                            @else
                             <h6 class="mb-1 text-right" id="render-ship">0<sup>đ</sup></h6>
+                            @endif
                         </div>
                         <div class="row d-flex justify-content-between px-4" id="tax">
                             <p class="mb-1 text-left">Tổng tiền</p>
-                            <h6 class="mb-1 text-right" id="render-totalPrice">0<sup>đ</sup></h6>
+                            @if(Session::has('cart')&&Auth::check())
+                                <h6 class="mb-1 text-right" id="render-totalPrice">
+                                    {{
+                                        number_format(Session::get('cart')->totalPrice+20000,0,".",".")
+                                    }}<sup>đ</sup>
+                                </h6>
+                            @elseif(Session::has('cart')&&Auth::check()&&Auth::User()->point>300)
+                                <h6 class="mb-1 text-right" id="render-totalPrice">
+                                    {{
+                                        number_format(Session::get('cart')->totalPrice,0,".",".")
+                                    }}<sup>đ</sup>
+                                </h6>
+                            @else
+                                <h6 class="mb-1 text-right" id="render-totalPrice">
+                                    {{
+                                        number_format(Session::get('cart')->totalPrice,0,".",".")
+                                    }}<sup>đ</sup>
+                                </h6>
+                            @endif
                         </div><button type="submit" class="btn-block btn-blue"><span><span id="checkout">Tiến hành thanh toán</span></span></button>
                     </div>
                     <!-- end payment -->
@@ -303,6 +290,7 @@ button:focus {
       </form>
     </div>
     <!-- end info customer -->
+    @endif
 </div>
 <!-- end content checkout -->
 <div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -317,81 +305,6 @@ button:focus {
 </div>
 @endsection
 @section('js')
-<script src="{{asset('js\jquery.min.js')}}"></script>
 <script src="{{asset('frontend/ajax/cart.js')}}"></script>
-<script>
-function changeWard()
-{
-    var id_district = document.getElementById("choose-district").value;
-    $.ajax({
-        type: 'get',
-        url: '/shopping-cart/checkout',
-        data: {
-          "id_district":id_district
-        },
-        success: function(response) {
-            $('#render-ward').empty().html('<select class="form-control" name="district" id="choose-ward" onchange="priceShipping()"></select>');
-            $('#choose-ward').append('<option value="">-- Chọn Phường/Xã --</option>');
-            $.each(response.ward, function(key, value){
-                $('#choose-ward').append('<option value="'+value.id+'">'+value.name+'</option>');
-            });
-        },
-        error: function (response) {
-            alert('Đã xảy ra lỗi! xin thử lại');
-        }
-    });
-}
-
-function priceShipping()
-{
-    var id_ward = document.getElementById("choose-ward").value;
-    $.ajax({
-        type: 'get',
-        url: '/shopping-cart/checkout',
-        data: {
-          "id_ward":id_ward
-        },
-        success: function(response) {
-            $('#render-ship').text(response.priceShip.toLocaleString('vi-VN', {style: 'currency',currency:'VND'}));
-            $('#render-totalPrice').text(response.totalPrice.toLocaleString('vi-VN', {style: 'currency',currency:'VND'}));
-        },
-        error: function (response) {
-            alert('Đã xảy ra lỗi! xin thử lại');
-        }
-    });
-}
-
-$(document).ready(function(){
-    $('.radio-group .radio').click(function(){
-        $('.radio').addClass('gray');
-        $(this).removeClass('gray');
-        var payment = $(this).attr('payment');
-        $('#choose-payment').val(payment);
-    });
-
-
-    $('#choose-province').on('change',function(e){
-        var id_province= $("#choose-province option:selected").val();
-        $.ajax({
-            type: 'get',
-            url: '/shopping-cart/checkout',
-            data: {
-              "id_province":id_province
-            },
-            success: function(response) {
-                $('#render-district').empty().html('<select class="form-control" name="district" id="choose-district" onchange="changeWard()"></select>');
-                $('#choose-district').append('<option value="">-- Chọn Quận/Huyện --</option>');
-                $.each(response.district, function(key, value){
-                    $('#choose-district').append('<option value="'+value.id+'">'+value.name+'</option>');
-                });
-            },
-            error: function (response) {
-                alert('Đã xảy ra lỗi! xin thử lại');
-            }
-        });
-        e.preventDefault();
-    });
-});
-
-</script>
+<script src="{{asset('frontend/ajax/checkout.js')}}"></script>
 @endsection

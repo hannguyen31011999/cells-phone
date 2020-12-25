@@ -19,7 +19,7 @@
                     <li><a href="#">{{Auth::User()->email}}<i class="lnr lnr-chevron-down"></i></a>
                         <ul class="ht-dropdown">
                             <li><a href="{{url('account/profile')}}">Thông tin cá nhân</a></li>
-                            <li><a href="">Lịch sử mua hàng</a></li>
+                            <li><a href="{{route('viewPurchase')}}">Lịch sử mua hàng</a></li>
                             <li><a href="{{route('logout')}}">Đăng xuất</a></li>
                         </ul>
                     </li>
