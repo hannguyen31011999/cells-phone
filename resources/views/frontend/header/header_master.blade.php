@@ -50,32 +50,11 @@
                             <div class="form-group">
                                 <select class="bootstrap-select" name="poscats">
                                     <option value="0">Danh mục</option>
-                                    <option value="2">Arrivals</option>
-                                    <option value="3">Cameras</option>
-                                    <option value="4">Cords and Cables</option>
-                                    <option value="5">gps accessories</option>
-                                    <option value="6">Microphones</option>
-                                    <option value="7">Wireless Transmitters</option>
-                                    <option value="8">GamePad</option>
-                                    <option value="9">cube lifestyle hd</option>
-                                    <option value="10">Bags</option>
-                                    <option value="11">Bottoms</option>
-                                    <option value="12">Shirts</option>
-                                    <option value="13">Tailored</option>
-                                    <option value="14">Home &amp; Kitchen</option>
-                                    <option value="15">Large Appliances</option>
-                                    <option value="16">Armchairs</option>
-                                    <option value="17">Bunk Bed</option>
-                                    <option value="18">Mattress</option>
-                                    <option value="19">Sideboard</option>
-                                    <option value="20">Small Appliances</option>
-                                    <option value="21">Bootees Bags</option>
-                                    <option value="22">Jackets</option>
-                                    <option value="23">Shelf</option>
-                                    <option value="24">Shoes</option>
-                                    <option value="25">Phones &amp; Tablets</option>
-                                    <option value="26">Tablet</option>
-                                    <option value="27">phones</option>
+                                    @foreach($categories as $Categories)
+                                        <option value="{{$Categories->id}}">
+                                            {{$Categories->categories_name}}
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                             <input type="text" name="search" placeholder="Tìm kiếm bằng từ khóa">
@@ -106,36 +85,25 @@
                 <div class="col-xl-9 col-lg-8 col-md-12 ">
                     <nav class="d-none d-lg-block">
                         <ul class="header-bottom-list d-flex">
-                            <li class="active"><a href="index.html">home<i class="fa fa-angle-down"></i></a>
-                                <!-- Home Version Dropdown Start -->
-                                <ul class="ht-dropdown">
-                                    <li><a href="index.html">Home Version 1</a></li>
-                                </ul>
-                                <!-- Home Version Dropdown End -->
+                            <li class="active"><a href="{{route('home')}}">Trang chủ</a>
                             </li>
-                            <li><a href="shop.html">shop<i class="fa fa-angle-down"></i></a>
+                            <li><a href="">Sản phẩm<i class="fa fa-angle-down"></i></a>
                                 <!-- Home Version Dropdown Start -->
                                 <ul class="ht-dropdown dropdown-style-two">
-                                    <li><a href="product.html">product details</a></li>
+                                    @foreach($categories as $Categories)
+                                        <li><a href="{{url('/dtdt/'.utf8tourl($Categories->categories_name))}}">
+                                            {{$Categories->categories_name}}
+                                        </a></li>
+                                    @endforeach
                                 </ul>
                                 <!-- Home Version Dropdown End -->
                             </li>
-                            <li><a href="blog.html">blog<i class="fa fa-angle-down"></i></a>
-                                <!-- Home Version Dropdown Start -->
-                                <ul class="ht-dropdown dropdown-style-two">
-                                    <li><a href="single-blog.html">blog details</a></li>
-                                </ul>
-                                <!-- Home Version Dropdown End -->
+                            <li><a href="">Bài viết</a>
                             </li>
-                            <li><a href="#">pages<i class="fa fa-angle-down"></i></a>
-                                <!-- Home Version Dropdown Start -->
-                                <ul class="ht-dropdown dropdown-style-two">
-                                    <li><a href="contact.html">contact us</a></li>
-                                </ul>
-                                <!-- Home Version Dropdown End -->
+                            <li><a href="{{url('/compare')}}">So sánh sản phẩm</a>
                             </li>
-                            <li><a href="about.html">About us</a></li>
-                            <li><a href="contact.html">contact us</a></li>
+                            <li><a href="">Về chúng tôi</a></li>
+                            <li><a href="">Liên hệ</a></li>
                         </ul>
                     </nav>
                     <div class="mobile-menu d-block d-lg-none">

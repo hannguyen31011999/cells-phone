@@ -56,6 +56,9 @@ Route::group(['namespace'=>'frontend'],function(){
 	Route::get('/shopping-cart/checkout','CheckoutController@index');
 
 	Route::post('/shopping-cart/checkout','CheckoutController@createOrder')->name('createOrder');
+
+	// categories product 
+	Route::get('/dtdt/{name}','CategoriesProduct@index');
 });
 
 Route::group(['prefix'=>'account','namespace'=>'frontend'],function(){
