@@ -2,9 +2,10 @@
 <div class="like-product ptb-95 off-white-bg pt-sm-50 pb-sm-55 ">
     <div class="container">
         <div class="like-product-area"> 
-            <h3>ĐIỆN THOẠI NỔI BẬT</h3>
+            <h3>Điện Thoại Nổi Bật</h3>
             <!-- Arrivals Product Activation Start Here -->
             <div class="like-pro-active owl-carousel">
+            @php
             @foreach($product as $products)
                 @foreach($products->ProductDetails as $key => $productDetail)
                 <!-- Double Product Start -->
@@ -14,10 +15,10 @@
                         <!-- Product Image Start -->
                         <div class="pro-img">
                             <a href="{{route('viewProductDetail',['name'=>utf8tourl($products->product_name.'-'.$productDetail->rom.'GB')])}}">
-                            @foreach($attribute as $attributes)
-                                @if($attributes->product_detail_id==$productDetail->id)
+                            @foreach($products->ListImages as $key1 => $attributes)
+                                @if($key==$key1)
                                     <img class="primary-img" src="{{asset('backend/attribute_img/'.$attributes->image)}}" alt="single-product">
-                                    @break
+                                    @break;
                                 @endif
                             @endforeach
                             </a>
@@ -29,7 +30,6 @@
                             <div class="pro-info">
                                 <h6><a href="product.html">{{$products->product_name}} {{$productDetail->rom}}GB</a></h6>
                                 <p style="margin-top: 5px;"><span class="price">{{number_format($productDetail->price_product, 0, ".", ".")}}đ</span></p>
-                                <p><span>22 Đánh giá</span></p>
                             </div>
                             <div class="pro-actions">
                                 <div class="actions-primary">
@@ -47,7 +47,7 @@
                 </div>
                 <!-- Double Product End -->
                 @endforeach
-            @endforeach                 
+            @endforeach     
             </div>
             <!-- Arrivals Product Activation End Here -->
         </div>

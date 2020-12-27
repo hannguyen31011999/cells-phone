@@ -58,7 +58,7 @@ Route::group(['namespace'=>'frontend'],function(){
 	Route::get('/dtdt/{name}','CategoriesProduct@index');
 
 	// product
-	Route::get('/{categories}/{name}','ProductController@index')->name('product');
+	Route::get('dtdt/{categories}/{name}','ProductController@index')->name('product');
 
 });
 
@@ -77,9 +77,7 @@ Route::group(['prefix'=>'account','namespace'=>'frontend'],function(){
 	Route::post('/confirm','RegisterController@Confirm')->name('confirm');
 
 	// login
-	Route::get('/login',function(){
-		return view('frontend.login.page_login');
-	});
+	Route::get('/login','LoginController@index');
 
 	Route::post('/login','LoginController@Login')->name('loginUser');
 

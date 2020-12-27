@@ -13,10 +13,35 @@ use Mail;
 use Hash;
 class LoginController extends Controller
 {
+    public function index()
+    {
+        if(Auth::check()){
+            // xử lý là user
+            if(Auth::User()->role==0)
+            {
+                if(Auth::User()->status!=1)
+                {
+                    Auth::logout();
+                    return back()->with('error','Tài khoản bị khóa hoặc chưa kích hoạt');
+                }else{
+                    if($request->session()->has('urlAction'))
+                    {
+                        return redirect($request->session()->get('urlAction'));
+                    }
+                    return redirect()->route('home');
+                }
+            }else{
+                return redirect('admin/dashboard');
+            }
+        }else{
+            return view('frontend.login.page_login');
+        }
+    }
     public function Login(FormLogin $request)
     {
         $validated = $request->validated();
         $remember = empty($request["remember"]) ? false : true;
+
         if(Auth::attempt(['email'=>$validated['email'],'password'=>$validated['password']],$remember))
         {
             // xử lý là user

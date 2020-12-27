@@ -8,6 +8,8 @@ use App\Model\Categories;
 use App\Model\Product;
 use App\Model\ProductDetail;
 use App\Model\AttributeProduct;
+use App\Model\OrderDetail;
+use App\Model\ListImage;
 use Session;
 class PageController extends Controller
 {
@@ -17,11 +19,24 @@ class PageController extends Controller
 	{
 		// Session::forget('compare');
 		$product = Product::orderBy('created_at','desc')
-							->with(['ProductDetails'])
-							->take(10)
+							->with(['ProductDetails','ListImages'])
+							->take(8)
 							->get();
-		$attribute = AttributeProduct::all(['image','product_detail_id']);
-		return view($this->module.'.index',compact('product','attribute'));
+		$data = OrderDetail::groupBy(['attribute_product_id','product_price'])
+		    	->selectRaw('sum(qty) as total,attribute_product_id,product_price')
+		    	->orderBy('total','desc')
+		    	->take(8)
+		    	->get();
+		$seller = [];
+		foreach ($data as $value) {
+			$arr = AttributeProduct::findOrFail($value->attribute_product_id)
+											->ProductDetails()
+											->first();
+			if(!in_array($arr,$seller)){
+				$seller[] = $arr;
+			}
+		}
+		return view($this->module.'.index',compact('product','seller'));
 	}
 
 	public function detailProduct(Request $request)

@@ -81,7 +81,7 @@
                         <!-- Product Image End -->
                         <!-- Product Content Start -->
                         <div class="pro-content">
-                            <a href="{{url(utf8tourl($value->product_name.'-'.$products->rom.'GB'))}}">{{$value->product_name.' '.$products->rom.'GB'}}</a>
+                            <a href="{{url(utf8tourl($value->product_name.'-'.$products->rom.'GB'))}}" style="font-size: 14px;">{{$value->product_name.' '.$products->rom.'GB'}}</a>
                             <p><span class="price">{{number_format($products->price_product,0,".",".")}}<sup>đ</sup></span></p>
                         </div>
                         <!-- Product Content End -->
