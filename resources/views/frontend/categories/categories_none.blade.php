@@ -16,7 +16,7 @@
                                         <ul>
                                         @foreach($product as $products)
                                             @if($products->categories_id==$Categories->id)
-                                                <li><a href="">{{$products->product_name}}</a></li>
+                                                <li><a href="{{route('product',['categories'=>utf8tourl($Categories->categories_name),'product'=>utf8tourl($products->product_name)])}}">{{$products->product_name}}</a></li>
                                             @endif
                                         @endforeach
                                         </ul>

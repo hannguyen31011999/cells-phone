@@ -44,9 +44,6 @@ Route::group(['namespace'=>'frontend'],function(){
 	// Route logout
 	Route::get('/logout','LoginController@Logout')->name('logout');
 
-	// login admin
-	Route::post('/login','LoginController@Login');
-
 	// product detail
 	Route::get('/{name}','ProductDetailController@index')->name('viewProductDetail');
 
@@ -59,6 +56,10 @@ Route::group(['namespace'=>'frontend'],function(){
 
 	// categories product 
 	Route::get('/dtdt/{name}','CategoriesProduct@index');
+
+	// product
+	Route::get('/{categories}/{name}','ProductController@index')->name('product');
+
 });
 
 Route::group(['prefix'=>'account','namespace'=>'frontend'],function(){
@@ -119,11 +120,13 @@ Route::group(['prefix'=>'account','namespace'=>'frontend'],function(){
 
 
 // Route login admin
-Route::get('/login',function(){
+Route::get('admin/login',function(){
 	return view('backend.login.index_login');
 });
 
-Route::post('/login','frontend\LoginController@Login');
+
+// login admin
+Route::post('admin/login','frontend\LoginController@Login');
 
 // List route admin
 Route::group(['prefix'=>'admin','middleware'=>'CheckAdminLogin','namespace'=>'backend'],function(){

@@ -17,7 +17,7 @@ class CreateSlug extends Migration
             $table->Increments('id');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('product');
-            $table->integer('product_detail_id')->unsigned();
+            $table->integer('product_detail_id')->nullable()->unsigned();
             $table->foreign('product_detail_id')->references('id')->on('product_detail');
             $table->string('url');
             $table->timestamps();

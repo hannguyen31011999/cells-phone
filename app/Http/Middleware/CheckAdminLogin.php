@@ -21,7 +21,7 @@ class CheckAdminLogin
             {
                 return $next($request);
             }
-            return redirect('/login')->with('error','Hết phiên đăng nhập');
+            return redirect('admin/login')->with('error','Hết phiên đăng nhập');
         }
     }
 

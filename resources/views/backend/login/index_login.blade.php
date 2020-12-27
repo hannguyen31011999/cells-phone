@@ -29,7 +29,7 @@
                                 <h4 class="text-white text-center mb-0 mt-0">Đăng nhập</h4>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="{{url('/login')}}" class="p-2" >
+                                <form method="POST" action="{{url('admin/login')}}" class="p-2" >
                                     @csrf
                                     <div class="form-group mb-3">
                                         @if(Session::has('error'))

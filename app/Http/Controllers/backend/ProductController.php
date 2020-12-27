@@ -12,6 +12,7 @@ use App\Model\Discount;
 use App\Model\ProductDetail;
 use App\Model\ListImage;
 use App\Model\AttributeProduct;
+use App\Model\Slug;
 class ProductController extends Controller
 {
     private $module = "backend.product";
@@ -67,6 +68,12 @@ class ProductController extends Controller
             $files = $request->file('image');
             try{
                 $product = Product::create($arr);
+                $product->Slugs()->create(
+                    [
+                        'product_detail_id'=>null,
+                        'url'=>utf8tourl($request['product_name'])
+                    ]
+                );
                 // save data to table product_detail
                 $product->ProductDetails()->create([
                     'rom'=>$request["rom"],
@@ -142,6 +149,7 @@ class ProductController extends Controller
         }
         //update product
         $product->update($request->all());
+        $product->Slugs()->update(['url'=>utf8tourl($request['product_name'])]);
         if($request->hasFile('image')){
             try{
                 foreach ($listImage as $key1 => $value) {
