@@ -70,7 +70,7 @@ class LoginController extends Controller
 
     public function Logout(Request $request)
     {
-        $url = (Auth::User()->role!=0) ? "/login" : "account/login";
+        $url = (Auth::User()->role!=0) ? "admin/login" : "account/login";
         Auth::logout();
         return redirect($url);
     }

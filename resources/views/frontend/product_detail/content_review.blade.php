@@ -41,7 +41,7 @@
                             </ul>
                             <!-- Reviews Field Start -->
                             <div class="riview-field mt-40">
-                                <form action="{{route('uploadReview',['url'=>$slug[0]->url])}}" method="post" id="review-sp" data-url="{{$slug[0]->url}}" product-id="{{$products->id}}" product-detail-id="{{$productDetail->id}}">
+                                <form action="{{route('uploadReview',['url'=>$slug->url])}}" method="post" id="review-sp" data-url="{{$slug->url}}" product-id="{{$products->id}}" product-detail-id="{{$productDetail->id}}">
                                     @csrf
                                     @if(Auth::check())
                                         <div class="form-group">

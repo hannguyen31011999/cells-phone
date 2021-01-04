@@ -32,14 +32,18 @@
                             <!-- Thumbnail Description Start -->
                             <div class="col-lg-7 col-md-6 col-sm-7">
                                 <div class="thubnail-desc fix mt-sm-40">
-                                    @if(isset($product)&&isset($productDetail)&&isset($discount))
+                                    @if(isset($product)&&isset($productDetail))
                                     <h3 class="product-header">
                                             @foreach($product as $products)
                                                 {{$products->product_name}} {{$productDetail->rom}}GB
                                             @endforeach
                                     </h3>
                                     <div>
-                                        <p id="price_attribute" class="d-flex align-items-center" style="color: red;font-size: 20px;"><span class="price">{{number_format($productDetail->price_product,0, ".", ".")}}<sup>đ</sup></span><span class="saving-price" style="margin-left: 5px;">khuyến mãi giảm trực tiếp {{($discount/1000)}}K</span></p>
+                                        <p id="price_attribute" class="d-flex align-items-center" style="color: red;font-size: 20px;"><span class="price">{{number_format($productDetail->price_product,0, ".", ".")}}<sup>đ</sup></span>
+                                            @if(!empty($discount))
+                                                <span class="saving-price" style="margin-left: 5px;">khuyến mãi giảm trực tiếp {{($discount->discount_value/1000)}}K</span>
+                                            @endif
+                                        </p>
                                     </div>
                                     @endif
                                     <p class="mb-20 pro-desc-details" style="margin-top: 5px;">Chọn màu mà bạn yêu thích</p>

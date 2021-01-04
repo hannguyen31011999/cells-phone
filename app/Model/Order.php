@@ -47,8 +47,13 @@ class Order extends Model
         return $this->hasMany("App\Model\OrderDetail",'order_id','id');
     }
 
+    public function CountOrderDetails()
+    {
+        return $this->hasMany("App\Model\OrderDetail",'order_id','id')->count();
+    }
+
     public function Users()
     {
-        return $this->belongsTo("App\Model\User",'user_id','id');
+        return $this->belongsTo("App\Model\User",'customer_id','id');
     }
 }

@@ -1,7 +1,7 @@
 @extends('frontend.master')
 
 @section('css')
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <style type="text/css">
 	.box-product{
 		display: flex;
@@ -25,11 +25,9 @@
 	}
 </style>
 @endsection
-
 @section('header')
     @include('frontend.header.header_master')
 @endsection
-
 @section('categories')
     @include('frontend.categories.categories_master')
 @endsection
@@ -50,13 +48,10 @@
     </div>
   </div>
 </div>
-
 @endsection
-
 @section('js')
 
 <script src="{{asset('frontend/ajax/cart.js')}}"></script>
 <script src="{{asset('frontend/ajax/quickview.js')}}"></script>
 <script src="{{asset('frontend/ajax/wish.js')}}"></script>
-
 @endsection

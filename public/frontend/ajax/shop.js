@@ -33,8 +33,12 @@ $(document).ready(function(){
                 $('.attribute').css('border','');
                 $('#attribute-image').remove();
                 $('#attribute-tag').remove();
-                $('#change-img').html('<a class="attribute-tag" data-fancybox="images" href="backend/attribute_img/'+response.data.image+'" alt="Sản phẩm" id="attribute-image"><img src="../backend/attribute_img/'+response.data.image+'" alt="Sản phẩm" id="attribute-image"></a>');
-                $('#price_attribute').html('<span class="price">'+price.toLocaleString('vi-VN', {style: 'currency',currency:'VND'})+'</span><span class="saving-price" style="margin-left: 5px;">khuyến mãi giảm trực tiếp '+ (response.discount/1000) +'K</span>');
+                $('#change-img').html('<a class="attribute-tag" data-fancybox="images" href="" alt="Sản phẩm" id="attribute-image"><img src="../../backend/attribute_img/'+response.data.image+'" alt="Sản phẩm" id="attribute-image"></a>');
+                if(response.discount!==null){
+                        $('#price_attribute').html('<span class="price">'+price.toLocaleString('vi-VN', {style: 'currency',currency:'VND'})+'</span><span class="saving-price" style="margin-left: 5px;">khuyến mãi giảm trực tiếp '+ (response.discount.discount_value/1000) +'K</span>');
+                }else{
+                    $('#price_attribute').html('<span class="price">'+price.toLocaleString('vi-VN', {style: 'currency',currency:'VND'})+'</span>');
+                }
                 $('#color'+id).css('border','solid 1px');
                 $('.add-cart').attr('id',id);
             },

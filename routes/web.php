@@ -16,6 +16,10 @@ Route::group(['namespace'=>'frontend'],function(){
 	// index 
 	Route::get('/','PageController@index')->name('home');
 
+	Route::post('/','PageController@loadPage');
+
+	Route::get('/seach','PageController@seachQuery');
+
 	Route::get('/modal-detail-product','PageController@detailProduct');
 
 	Route::get('/change-color','PageController@changeColorProduct');
@@ -59,6 +63,9 @@ Route::group(['namespace'=>'frontend'],function(){
 
 	// product
 	Route::get('dtdt/{categories}/{name}','ProductController@index')->name('product');
+
+
+	Route::get('dtdt/bai-viet','PostController@index');
 
 });
 
@@ -130,9 +137,7 @@ Route::post('admin/login','frontend\LoginController@Login');
 Route::group(['prefix'=>'admin','middleware'=>'CheckAdminLogin','namespace'=>'backend'],function(){
 
 	// Route dashboard
-	Route::get('/dashboard',function(){
-		return view('backend.dashboard.index');
-	});
+	Route::get('/dashboard','DashBoardController@index');
 
 	// Route group categories
 	Route::group(['prefix'=>'categories'],function(){
@@ -187,6 +192,14 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminLogin','namespace'=>'ba
 			Route::get('/edit/{id}','DiscountController@edit')->name('edit');
 			Route::post('/edit/{id}','DiscountController@update')->name('update');
 			Route::get('/delete/{id}','DiscountController@destroy')->name('delete');
+		});
+	});
+
+	Route::group(['prefix'=>'order'],function(){
+		Route::name('order.')->group(function(){
+			Route::get('/list','OrderController@index')->name('list');
+			Route::get('/update','OrderController@update')->name('update');
+			Route::get('/delete/{id}','OrderController@destroy')->name('delete');
 		});
 	});
 });

@@ -147,7 +147,7 @@ class CheckoutController extends Controller
                             'discount'=>$value['discount']
                         ]);
                     }
-                    if($payment){
+                    if($payment==1){
 		                session(['cost_id' => $request->id]);
 		                session(['url_prev' => url()->previous()]);
 		                $vnp_TxnRef = $order->id; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
@@ -204,15 +204,15 @@ class CheckoutController extends Controller
                         }else{
                             $address = $request->address." ".Ward::findOrFail($request->ward)->name." ".District::findOrFail($request->district)->name." ".Province::findOrFail($request->province)->name;
                             $mail = [
-                                'email'=>!empty($request->email) ? $request->email : Auth::User()->fullname,
+                                'email'=>$request->email,
                                 'cart'=>Session('cart')->products,
                                 'date'=>Carbon::now('Asia/Ho_Chi_Minh'),
                                 'discount'=>Session('cart')->totalDiscount,
                                 'totalPrice'=>Session('cart')->totalPrice + $priceShip,
                                 'price_ship'=>$priceShip,
-                                'address'=>!empty($address) ? $empty : Auth::User()->address,
-                                'name'=>!empty($request->name) ? $request->name : Auth::User()->fullname,
-                                'phone'=>!empty($request->phone) ? $request->phone : Auth::User()->phone,
+                                'address'=>$request->address,
+                                'name'=>$request->name,
+                                'phone'=>$request->phone,
                                 'order_id'=>$order->id
                             ];
                             Mail::send('frontend.checkout.checkout_mail',$mail,
@@ -224,7 +224,7 @@ class CheckoutController extends Controller
                         }   
                     }
                 } 
-            }catch(Exception $e){
+            }catch(\Exception $e){
 
             }
         }

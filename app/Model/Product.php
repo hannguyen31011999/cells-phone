@@ -73,6 +73,11 @@ class Product extends Model
         return $this->belongsTo('App\Model\Discount','discount_id','id');
     }
 
+    public function Categories()
+    {
+        return $this->belongsTo('App\Model\Categories','categories_id','id');
+    }
+
     public function Slugs()
     {
         return $this->hasMany("App\Model\Slug",'product_id','id');

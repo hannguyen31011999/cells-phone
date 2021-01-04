@@ -31,6 +31,29 @@ $(document).on('click', '.add-cart', function(e){
     e.preventDefault();
 });
 
+$(document).ready(function(){
+        if (window.history) {
+            loadPage();
+        }
+    });
+function loadPage(){
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+    $.ajax(
+    {
+        url: '/',
+        type: "post",
+        datatype: "html"
+    }).done(function(response){
+        $('#cart-render').empty().html(response);
+    }).fail(function(jqXHR, ajaxOptions, thrownError){
+        console.log('error');
+    });
+}
+
 $(document).on('click', '#delete-cart', function(e){
     var id = $(this).attr('data-id');
     $.ajax({
@@ -108,3 +131,27 @@ $(document).on('change', 'input[name=changeQuantity]', function(e){
     
     e.preventDefault();
 });
+
+
+// $(document).on('keyup', '#seach', function(e){
+//     var seach = $('#seach').val();
+//     console.log(seach);
+//     $.ajax({
+//         type: 'get',
+//         url: '/',
+//         data: {
+//           "seach":seach
+//         },
+//         success: function(response) {
+//             if(response!==null){
+
+//             }else{
+                
+//             }
+//         },
+//         error: function (response) {
+//             alert('Đã xảy ra lỗi! xin thử lại');
+//         }
+//     });
+//     e.preventDefault();
+// });

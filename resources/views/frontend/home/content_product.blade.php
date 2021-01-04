@@ -5,7 +5,6 @@
             <h3>Điện Thoại Nổi Bật</h3>
             <!-- Arrivals Product Activation Start Here -->
             <div class="like-pro-active owl-carousel">
-            @php
             @foreach($product as $products)
                 @foreach($products->ProductDetails as $key => $productDetail)
                 <!-- Double Product Start -->

@@ -31,7 +31,7 @@ class CategoriesProduct extends Controller
                                     ->Products()
                                     ->paginate(2);
             $data = Categories::where('categories_name','like','%'.$name)->first();
-        }catch(Exception $e){
+        }catch(\Exception $e){
 
         }
         if($request->ajax()){

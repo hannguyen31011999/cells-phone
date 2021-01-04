@@ -92,8 +92,8 @@
                             <i class="lnr lnr-gift"></i>
                         </div>
                         <div class="support-desc">
-                            <h6>Great Value</h6>
-                            <span>Nunc id ante quis tellus faucibus dictum in eget.</span>
+                            <h6>Quà tặng</h6>
+                            <span>Với mỗi sản phẩm sẽ có quà tặng giá trị tương ứng.</span>
                         </div>
                     </div>
                     <div class="single-support">
@@ -101,8 +101,8 @@
                             <i class="lnr lnr-rocket"></i>
                         </div>
                         <div class="support-desc">
-                            <h6>Worlwide Delivery</h6>
-                            <span>Quisque posuere enim augue, in rhoncus diam dictum non</span>
+                            <h6>Giao nhận</h6>
+                            <span>Chính sách giao hàng nhanh chóng và kĩ lưỡng.</span>
                         </div>
                     </div>
                     <div class="single-support">
@@ -110,8 +110,8 @@
                            <i class="lnr lnr-lock"></i>
                         </div>
                         <div class="support-desc">
-                            <h6>Safe Payment</h6>
-                            <span>Duis suscipit elit sem, sed mattis tellus accumsan.</span>
+                            <h6>Bảo mật</h6>
+                            <span>Thanh toán trực tuyến với độ bảo mật cao đảm bảo an toàn cho khách hàng.</span>
                         </div>
                     </div>
                     <div class="single-support">
@@ -119,8 +119,8 @@
                            <i class="lnr lnr-enter-down"></i>
                         </div>
                         <div class="support-desc">
-                            <h6>Shop Confidence</h6>
-                            <span>Faucibus dictum suscipit eget metus. Duis  elit sem, sed.</span>
+                            <h6>Mua sắm</h6>
+                            <span>Cửa hàng chúng tôi với đầy đủ mọi thiết bị di động.</span>
                         </div>
                     </div>
                     <div class="single-support">
@@ -128,8 +128,8 @@
                            <i class="lnr lnr-users"></i>
                         </div>
                         <div class="support-desc">
-                            <h6>24/7 Help Center</h6>
-                            <span>Quisque posuere enim augue, in rhoncus diam dictum non.</span>
+                            <h6>Hỗ trợ</h6>
+                            <span>Hỗ trợ trực tiếp thắc mắc của khách hàng 24/7.</span>
                         </div>
                     </div>
                 </div>

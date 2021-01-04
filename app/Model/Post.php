@@ -1,13 +1,13 @@
 <?php
 
-namespace App\model;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class OrderDetail extends Model
+class Post extends Model
 {
 	use SoftDeletes;
-	protected $table = "order_detail";
+    protected $table = "post";
 
     protected $primaryKey = "id";
 
@@ -15,13 +15,11 @@ class OrderDetail extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'id',
-    	'order_id',
-    	'attribute_product_id',
-        'product_name',
-    	'qty',
-    	'product_price',
-        'discount',
+    	'id',
+    	'title',
+    	'content',
+    	'image',
+    	'user_id_created',
     	'created_at',
         'updated_at',
         'deleted_at'
@@ -38,13 +36,8 @@ class OrderDetail extends Model
         'deleted_at'
     ];
 
-    public function Products()
+    public function Users()
     {
-        return $this->belongsTo('App\Model\Product','product_id','id');
-    }
-
-    public function AttributeProducts()
-    {
-        return $this->belongsTo('App\Model\AttributeProduct','attribute_product_id','id');
+    	return $this->hasMany('App\Model\User','user_id_created','id');
     }
 }

@@ -34,9 +34,6 @@ class CreateReferenceFk extends Migration
             $table->foreign('user_id_created')->references('id')->on('user')->onDelete('cascade');
         });
 
-        Schema::table('user', function ($table) {
-            $table->foreign('role')->references('id')->on('permisson')->onDelete('cascade');
-        });
 
         Schema::table('order', function ($table) {
             $table->foreign('customer_id')->references('id')->on('user')->onDelete('cascade');

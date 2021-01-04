@@ -8,6 +8,7 @@ use App\Cart;
 use Session;
 use App\Model\AttributeProduct;
 use App\Model\Product;
+use Carbon\Carbon;
 class CartController extends Controller
 {
 	private $module = "frontend.header";
@@ -44,18 +45,20 @@ class CartController extends Controller
 						$productName = $attribute->Products()->get(['product_name'])[0]->product_name." ".$attribute->ProductDetails()->get(['rom'])[0]->rom."GB";
 						$price = $attribute->price_attribute;
 						$discount = Product::findOrFail($attribute->Products()->get(['id'])[0]->id)
-												->Discounts()->get(['discount_value'])[0]
-												->discount_value;
+												->Discounts()
+												->where('discount_end','>',Carbon::now('Asia/Ho_Chi_Minh'))
+												->first();
+						$vourcher = (!empty($discount)) ? $discount->discount_value : 0;
 						$color = $attribute->color;
 						$image = $attribute->image;
 						$qty = $request->qty;
-						$product = ['productName'=>$productName,'price'=>$price,'color'=>$color,'image'=>$image,'discount'=>$discount,'qty'=>$qty];
+						$product = ['productName'=>$productName,'price'=>$price,'color'=>$color,'image'=>$image,'discount'=>$vourcher,'qty'=>$qty];
 						$newCart->addCart($product,$request->id);
 						Session(['cart'=>$newCart]);
 						return view($this->module.".cart");
 					}
 				}
-			}catch(Exception $e){
+			}catch(\Exception $e){
 				return response()->json(['messenger'=>'Thêm giỏ hàng thất bại'],500);
 			}
 		}

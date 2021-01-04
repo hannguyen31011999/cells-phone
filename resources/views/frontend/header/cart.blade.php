@@ -1,3 +1,4 @@
+
 <!-- Cart Box Start Here -->
 <ul class="d-flex justify-content-lg-end justify-content-center align-items-center">
     @if(Session::has('cart'))<li><a href="{{url('/shopping-cart')}}"><i class="lnr lnr-cart"></i><span class="my-cart"><span class="total-pro">{{Session::get('cart')->totalQuantity}}</span><span>Giỏ hàng</span></span></a>

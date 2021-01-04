@@ -12,15 +12,16 @@ use App\Model\ProductDetail;
 use App\Model\AttributeProduct;
 use App\Model\Review;
 use App\Model\User;
+use Carbon\Carbon;
 class ProductDetailController extends Controller
 {
 	private $module = "frontend.product_detail";
 	public function index(Request $request,$name)
 	{
 		$request->session()->put('urlAction',$name);
-		$slug = Slug::where('url','like','%'.$name.'%')->get();
-		$products = Product::findOrFail($slug[0]->product_id);
-		$productDetail = ProductDetail::findOrFail($slug[0]->product_detail_id);
+		$slug = Slug::where('url','like','%'.$name.'%')->first();
+		$products = Product::findOrFail($slug->product_id);
+		$productDetail = ProductDetail::findOrFail($slug->product_detail_id);
 		$attribute = $productDetail->AttributeProducts()->get();
 		$listImage = $products->ListImages()->get();
 		$related = Product::where('categories_id',$products->categories_id)
@@ -29,9 +30,9 @@ class ProductDetailController extends Controller
 								->take(6)
 								->get();
 		$totalSlugs = $products->slugs()->get();
-		$discount = $products->Discounts()->get('discount_value')[0]->discount_value;
+		$discount = $products->Discounts()->where('discount_end','>',Carbon::now('Asia/Ho_Chi_Minh'))->first();
 		$name = $products->product_name." ".$productDetail->rom."GB";
-		$review = Review::where('product_detail_id',$slug[0]->product_detail_id)
+		$review = Review::where('product_detail_id',$slug->product_detail_id)
 							->orderBy('created_at','desc')
 							->get();
 		$countReview = $productDetail->CountReview();

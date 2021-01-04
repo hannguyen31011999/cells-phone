@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePermisson extends Migration
+class CreateVisitor extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreatePermisson extends Migration
      */
     public function up()
     {
-        Schema::create('permisson', function (Blueprint $table) {
+        Schema::create('visitor', function (Blueprint $table) {
             $table->Increments('id');
-            $table->string('permisson_role');
-            $table->string('permisson_detail');
-            $table->softDeletes();
+            $table->char('ip');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreatePermisson extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permisson');
+        Schema::dropIfExists('visitor');
     }
 }

@@ -61,7 +61,9 @@
                                 @if(isset($productDetail))
                                     {{number_format($productDetail->price_product, 0, ".", ".")}}<sup>đ</sup>
                                 @endif
-                            </span><span class="saving-price">vourcher giảm trực tiếp @if(isset($discount)){{number_format($discount/1000, 0, ".", ".")."K"}}@endif</span></p>
+                            @if(!empty($discount))
+                            </span><span class="saving-price">vourcher giảm trực tiếp {{number_format($discount->discount_value/1000, 0, ".", ".")."K"}}</span></p>
+                            @endif
                         </div>
                         <div class="product-size mb-20 clearfix">
                             <div class="box-product">

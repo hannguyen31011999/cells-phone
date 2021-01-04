@@ -46,18 +46,8 @@
                 <!-- Categorie Search Box Start Here -->
                 <div class="col-lg-5 col-md-8 ml-auto mr-auto col-10">
                     <div class="categorie-search-box">
-                        <form action="#">
-                            <div class="form-group">
-                                <select class="bootstrap-select" name="poscats">
-                                    <option value="0">Danh mục</option>
-                                    @foreach($categories as $Categories)
-                                        <option value="{{$Categories->id}}">
-                                            {{$Categories->categories_name}}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <input type="text" name="search" placeholder="Tìm kiếm bằng từ khóa">
+                        <form action="{{url('/seach')}}" method="get">
+                            <input type="text" name="query" id="seach" placeholder="Tìm kiếm bằng từ khóa">
                             <button><i class="lnr lnr-magnifier"></i></button>
                         </form>
                     </div>
@@ -102,8 +92,8 @@
                             </li>
                             <li><a href="{{url('/compare')}}">So sánh sản phẩm</a>
                             </li>
-                            <li><a href="">Về chúng tôi</a></li>
-                            <li><a href="">Liên hệ</a></li>
+                            <li><a href="#">Về chúng tôi</a></li>
+                            <li><a href="#">Liên hệ</a></li>
                         </ul>
                     </nav>
                     <div class="mobile-menu d-block d-lg-none">

@@ -340,7 +340,7 @@
                         </li>
 
                         <li>
-                            <a href="javascript: void(0);" class="waves-effect">
+                            <a href="{{route('order.list')}}" class="waves-effect">
                                 <i class="ion-md-cart font-20"></i>
                                 <span> Đơn hàng </span>
                             </a>
