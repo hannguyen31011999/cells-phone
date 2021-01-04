@@ -1,7 +1,7 @@
 1.Các bước để chạy project
 
 +Bước 1:
-Tạo một database trên csdl là smartphonequan9
+Tạo một database trên mysql có tên db là:smartphonequan9
 
 +Bước 2:
 Chạy lệnh command-line: php artisan migrate.
