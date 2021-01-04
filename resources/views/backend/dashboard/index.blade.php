@@ -50,7 +50,7 @@
                         <h2 class="my-0 text-white"><span data-plugin="counterup">{{$countPost}}</span></h2>
                         <p class="mb-0">Bài viết</p>
                     </div>
-                    <a href="" style="color:white;"><i class="ion-ios-create"></i></a>
+                    <a href="{{route('post.list')}}" style="color:white;"><i class="ion-ios-create"></i></a>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
                         <h2 class="my-0 text-white"><span data-plugin="counterup">{{$countOrder}}</span></h2>
                         <p class="mb-0">Đơn hàng</p>
                     </div>
-                    <a href="" style="color:white;"><i class="ion-md-cart"></i></a>
+                    <a href="{{route('order.list')}}" style="color:white;"><i class="ion-md-cart"></i></a>
                 </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
                         <h2 class="my-0 text-white"><span data-plugin="counterup">{{$countReview}}</span></h2>
                         <p class="mb-0">Bình luận</p>
                     </div>
-                    <a href="" style="color:white;"><i class="mdi mdi-comment-multiple"></i></a>
+                    <a href="{{route('review.list')}}" style="color:white;"><i class="mdi mdi-comment-multiple"></i></a>
                 </div>
             </div>
         </div>

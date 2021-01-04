@@ -33,7 +33,7 @@
         @endif
         <div class="card">
             <div class="card-body table-responsive">
-                <h4 class="m-t-0 header-title mb-4"><b>Danh sách chi tiết sản phẩm</b></h4>
+                <h4 class="m-t-0 header-title mb-4"><b>Danh sách đơn hàng</b></h4>
                 <div class="button-add">
                     <a href="{{route('discount.store')}}" class="btn btn-primary waves-effect waves-light ">Tạo mới</a>
                 </div>

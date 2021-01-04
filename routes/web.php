@@ -195,11 +195,32 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminLogin','namespace'=>'ba
 		});
 	});
 
+	// route order
 	Route::group(['prefix'=>'order'],function(){
 		Route::name('order.')->group(function(){
 			Route::get('/list','OrderController@index')->name('list');
 			Route::get('/update','OrderController@update')->name('update');
 			Route::get('/delete/{id}','OrderController@destroy')->name('delete');
+		});
+	});
+
+	// route post
+	Route::group(['prefix'=>'post'],function(){
+		Route::name('post.')->group(function(){
+			Route::get('/list','PostController@index')->name('list');
+			Route::get('/create','PostController@create')->name('store');
+			Route::post('/create','PostController@store')->name('create');
+			Route::get('/edit/{id}','PostController@edit')->name('edit');
+			Route::post('/edit/{id}','PostController@update')->name('update');
+			Route::get('/delete/{id}','PostController@destroy')->name('delete');
+		});
+	});
+
+	// route review
+	Route::group(['prefix'=>'review'],function(){
+		Route::name('review.')->group(function(){
+			Route::get('/list','ReviewController@index')->name('list');
+			Route::get('/delete/{id}','ReviewController@destroy')->name('delete');
 		});
 	});
 });

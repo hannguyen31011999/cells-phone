@@ -14,7 +14,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="header-title mb-4">Trang chi tiết sản phẩm</h4>
+                <h4 class="header-title mb-4">Trang sửa khuyến mãi</h4>
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-8">

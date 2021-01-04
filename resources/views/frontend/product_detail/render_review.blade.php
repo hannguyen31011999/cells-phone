@@ -2,10 +2,12 @@
     <h2>Bình luận khách hàng</h2>
 </div>
 @foreach($review as $reviews)
-    <div id="header-name" style="width: 25px;height: 25px;background: #ddd;color: #666;text-align: center;text-transform: uppercase;font-size: 12px;margin-right: 7px;line-height: 26px;float: left;">{{firstChar($reviews->name)}}</div>
-    <p id="render-name">{{$reviews->name}}</p>
-    <p id="">{{$reviews->content}}</p>
-    <p style="margin-bottom: 15px;">{{date_format(new Datetime($reviews->created_at),"d-m-Y H:i")}}</p>
+    @if($reviews->status!=0)
+        <div id="header-name" style="width: 25px;height: 25px;background: #ddd;color: #666;text-align: center;text-transform: uppercase;font-size: 12px;margin-right: 7px;line-height: 26px;float: left;">{{firstChar($reviews->name)}}</div>
+        <p id="render-name">{{$reviews->name}}</p>
+        <p id="">{{$reviews->content}}</p>
+        <p style="margin-bottom: 15px;">{{date_format(new Datetime($reviews->created_at),"d-m-Y H:i")}}</p>
+    @endif
 @endforeach
 <h4 class="review-mini-title">Đánh giá của khách hàng</h4>
 <ul class="review-list">

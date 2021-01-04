@@ -347,7 +347,7 @@
                         </li>
 
                         <li>
-                            <a href="javascript: void(0);" class="waves-effect">
+                            <a href="{{route('post.list')}}" class="waves-effect">
                                 <i class="ion ion-ios-create font-20"></i>
                                 <span> Bài viết </span>
                             </a>
@@ -368,7 +368,7 @@
                         </li>
 
                         <li>
-                            <a href="javascript: void(0);" class="waves-effect">
+                            <a href="{{route('review.list')}}" class="waves-effect">
                                 <i class="fas fa-comment font-20"></i>
                                 <span> Đánh giá</span>
                             </a>

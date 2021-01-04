@@ -38,6 +38,6 @@ class Post extends Model
 
     public function Users()
     {
-    	return $this->hasMany('App\Model\User','user_id_created','id');
+    	return $this->hasMany('App\Model\User','id','user_id_created');
     }
 }
