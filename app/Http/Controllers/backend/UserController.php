@@ -4,10 +4,10 @@ namespace App\Http\Controllers\backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\Review;
-class ReviewController extends Controller
+use App\Model\User;
+class UserController extends Controller
 {
-    private $module = "backend.review";
+    private $module = "backend.user";
     /**
      * Display a listing of the resource.
      *
@@ -18,14 +18,14 @@ class ReviewController extends Controller
         if($request->ajax()){
             try{
                 $status = ($request->status=="0") ? 1 : 0;
-                Review::findOrFail((int)$request->id)->update(['status'=>$status]);
+                User::findOrFail((int)$request->id)->update(['status'=>$status]);
                 return "true";
             }catch(\Exception $e){
 
             }
         }else{
-            $review = Review::all();
-            return view($this->module.'.list',compact('review'));
+            $user = User::where('role',0)->get();
+            return view($this->module.'.list',compact('user'));
         } 
     }
 
@@ -92,7 +92,7 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        Review::findOrFail($id)->delete();
-        return redirect()->route('review.list');
+        User::findOrFail($id)->delete();
+        return redirect()->route('user.list');
     }
 }

@@ -223,4 +223,12 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminLogin','namespace'=>'ba
 			Route::get('/delete/{id}','ReviewController@destroy')->name('delete');
 		});
 	});
+
+	// route review
+	Route::group(['prefix'=>'user'],function(){
+		Route::name('user.')->group(function(){
+			Route::get('/list','UserController@index')->name('list');
+			Route::get('/delete/{id}','UserController@destroy')->name('delete');
+		});
+	});
 });

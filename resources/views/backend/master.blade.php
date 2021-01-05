@@ -375,16 +375,9 @@
                         </li>
 
                         <li>
-                            <a href="javascript: void(0);" class="waves-effect">
+                            <a href="{{route('user.list')}}" class="waves-effect">
                                 <i class="ion ion-md-person"></i>
                                 <span> Người dùng </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="javascript: void(0);" class="waves-effect">
-                                <i class="ion ion-ios-finger-print font-20"></i>
-                                <span> Phân quyền </span>
                             </a>
                         </li>
                     </ul>
