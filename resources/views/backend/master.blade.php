@@ -360,10 +360,10 @@
                                 <span class="badge badge-danger badge-pill float-right"> 4 </span>
                             </a>
                             <ul class="nav-second-level" aria-expanded="false">
-                                <li><a href="forms-elements.html">Doanh thu</a></li>
-                                <li><a href="forms-validation.html">Đơn hàng</a></li>
-                                <li><a href="forms-advanced.html">Người dùng</a></li>
-                                <li><a href="forms-wizard.html">Sản phẩm</a></li>
+                                <li><a href="{{route('statistical.revenue')}}">Doanh thu</a></li>
+                                <li><a href="{{route('statistical.order')}}">Đơn hàng</a></li>
+                                <li><a href="{{route('statistical.user')}}">Người dùng</a></li>
+                                <li><a href="{{route('statistical.product')}}">Sản phẩm</a></li>
                             </ul>
                         </li>
 

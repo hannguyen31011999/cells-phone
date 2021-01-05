@@ -88,12 +88,10 @@
                                 </ul>
                                 <!-- Home Version Dropdown End -->
                             </li>
-                            <li><a href="">Bài viết</a>
+                            <li><a href="{{route('page_post')}}">Bài viết</a>
                             </li>
                             <li><a href="{{url('/compare')}}">So sánh sản phẩm</a>
                             </li>
-                            <li><a href="#">Về chúng tôi</a></li>
-                            <li><a href="#">Liên hệ</a></li>
                         </ul>
                     </nav>
                     <div class="mobile-menu d-block d-lg-none">

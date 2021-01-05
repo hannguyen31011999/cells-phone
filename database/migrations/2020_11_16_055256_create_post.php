@@ -19,6 +19,7 @@ class CreatePost extends Migration
             $table->text('content');
             $table->char('image');
             $table->integer('user_id_created')->unsigned();
+            $table->string('url');
             $table->softDeletes();
             $table->timestamps();
         });

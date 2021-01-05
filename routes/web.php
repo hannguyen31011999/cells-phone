@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+// post
+Route::get('/bai-viet','frontend\PostController@index')->name('page_post');
+Route::get('/bai-viet/{name}','frontend\PostController@show')->name('page_detail_post');
 Route::group(['namespace'=>'frontend'],function(){
 
 	// index 
@@ -63,9 +66,6 @@ Route::group(['namespace'=>'frontend'],function(){
 
 	// product
 	Route::get('dtdt/{categories}/{name}','ProductController@index')->name('product');
-
-
-	Route::get('dtdt/bai-viet','PostController@index');
 
 });
 
@@ -229,6 +229,16 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminLogin','namespace'=>'ba
 		Route::name('user.')->group(function(){
 			Route::get('/list','UserController@index')->name('list');
 			Route::get('/delete/{id}','UserController@destroy')->name('delete');
+		});
+	});
+
+	// statistical
+	Route::group(['prefix'=>'statistical'],function(){
+		Route::name('statistical.')->group(function(){
+			Route::get('/revenue','StatisticalController@statisticalRevenue')->name('revenue');
+			Route::get('/order','StatisticalController@statisticalOrder')->name('order');
+			Route::get('/user','StatisticalController@statisticalUser')->name('user');
+			Route::get('/product','StatisticalController@statisticalProduct')->name('product');
 		});
 	});
 });

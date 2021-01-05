@@ -89,7 +89,8 @@ class PostController extends Controller
                             'title'=>$request->title,
                             'content'=>$request->content,
                             'image'=>$fileName,
-                            'user_id_created'=>$this->id
+                            'user_id_created'=>$this->id,
+                            'url'=>utf8tourl($request->title)
                         ]);
                         return redirect('admin/post/list')->with('success','Thêm mới thành công');
                     }catch(\Exception $e){
@@ -152,6 +153,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $array = $request->all();
         $array['user_id_created'] = $this->id;
+        $array['url'] = utf8tourl($request->title);
         if(strcmp($request->title,$post->title)!==0)
         {
             $this->validate($request,
