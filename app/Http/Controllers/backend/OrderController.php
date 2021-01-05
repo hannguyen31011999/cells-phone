@@ -4,6 +4,9 @@ namespace App\Http\Controllers\backend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\OrdersExport;
+use App\Exports\OrdersExportView;
 use App\Model\Order;
 use App\Model\User;
 use App\Model\OrderDetail;
@@ -36,13 +39,16 @@ class OrderController extends Controller
             }
             
         }else{
-
-            if($request->type=="false"){
-                $order = Order::where('status',0)->orWhere('status',1)->get();
-                return view($this->module.'.list',compact('order'));
+            if(!empty($request->type_excel)){
+                return Excel::download(new OrdersExportView($this->module.'.excel'),'orders.'.$request->type_excel);
             }else{
-                $order = Order::orderBy('created_at','desc')->get();
-                return view($this->module.'.list',compact('order'));
+                if($request->type=="false"){
+                    $order = Order::where('status',0)->orWhere('status',1)->get();
+                    return view($this->module.'.list',compact('order'));
+                }else{
+                    $order = Order::orderBy('created_at','desc')->get();
+                    return view($this->module.'.list',compact('order'));
+                }
             }
         }
     }

@@ -34,6 +34,9 @@
         <div class="card">
             <div class="card-body table-responsive">
                 <h4 class="m-t-0 header-title mb-4"><b>Danh sách chi tiết sản phẩm</b></h4>
+                <div class="button-export">
+                    <a href="{{url('/admin/order/list?type_excel=xlsx')}}" class="btn btn-primary waves-effect waves-light ">Export excel</a>
+                </div>
                 <div class="button-add">
                     <select class="form-control" id="filter-status" onchange="filterStatus()">
                         <option value="4">Tất cả đơn hàng</option>
